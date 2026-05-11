@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
 void main() {
   runApp(const UXUIApp());
@@ -13,10 +14,10 @@ class UXUIApp extends StatelessWidget {
       title: 'UX/UI Course',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFF1A1A1A),
+        scaffoldBackgroundColor: AppColors.background,
         colorScheme: const ColorScheme.dark(
-          primary: Color(0xFFFF6B4A),
-          surface: Color(0xFF242424),
+          primary: AppColors.green,
+          surface: AppColors.cardBackground,
         ),
       ),
       home: const CourseNavPage(),
@@ -80,7 +81,7 @@ class _CourseNavPageState extends State<CourseNavPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A1A),
+      backgroundColor: AppColors.background,
       body: Row(
         children: [
           // ── Sidebar ──────────────────────────────────────────────────────
@@ -90,7 +91,7 @@ class _CourseNavPageState extends State<CourseNavPage> {
             width: _sidebarCollapsed ? kCollapsedWidth : kSidebarWidth,
             clipBehavior: Clip.hardEdge,
             decoration: const BoxDecoration(
-              color: Color(0xFF242424),
+              color: AppColors.cardBackground,
             ),
             child: _SidebarContent(
               sections: kSections,
@@ -169,10 +170,10 @@ class _SidebarContent extends StatelessWidget {
             height: 44,
             alignment: Alignment.center,
             decoration: const BoxDecoration(
-              border: Border(top: BorderSide(color: Color(0xFF333333))),
+              border: Border(top: BorderSide(color: AppColors.cardBorder)),
             ),
             child: const Icon(Icons.keyboard_double_arrow_left,
-                color: Color(0xFF888888), size: 20),
+                color: AppColors.grey, size: 20),
           ),
         ),
       ],
@@ -191,7 +192,7 @@ class _PhaseHeader extends StatelessWidget {
       child: Text(
         title,
         style: const TextStyle(
-          color: Color(0xFFCCCCCC),
+          color: AppColors.greyLight,
           fontSize: 13,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.2,
@@ -219,7 +220,7 @@ class _SectionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasLessons = section.lessons.isNotEmpty;
-    final accent = const Color(0xFFFF6B4A);
+    const accent = AppColors.green;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +236,7 @@ class _SectionTile extends StatelessWidget {
                   child: Text(
                     section.title,
                     style: TextStyle(
-                      color: isExpanded ? accent : const Color(0xFFCCCCCC),
+                      color: isExpanded ? accent : AppColors.greyLight,
                       fontSize: 13.5,
                       fontWeight:
                           isExpanded ? FontWeight.w600 : FontWeight.w400,
@@ -245,7 +246,7 @@ class _SectionTile extends StatelessWidget {
                 if (hasLessons)
                   Icon(
                     isExpanded ? Icons.expand_more : Icons.chevron_right,
-                    color: isExpanded ? accent : const Color(0xFF666666),
+                    color: isExpanded ? accent : AppColors.grey,
                     size: 18,
                   ),
               ],
@@ -264,12 +265,12 @@ class _SectionTile extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 32, vertical: 9),
                 decoration: BoxDecoration(
                   color:
-                      isSelected ? const Color(0xFF2E2E2E) : Colors.transparent,
+                      isSelected ? AppColors.greenDim : Colors.transparent,
                 ),
                 child: Text(
                   lesson,
                   style: TextStyle(
-                    color: const Color(0xFFAAAAAA),
+                    color: isSelected ? AppColors.white : AppColors.greyLight,
                     fontSize: 13,
                     fontWeight:
                         isSelected ? FontWeight.w500 : FontWeight.normal,
@@ -311,7 +312,7 @@ class _MainContent extends StatelessWidget {
             child: Text(
               'Lesson content will appear here.',
               style: TextStyle(
-                color: Color(0xFF666666),
+                color: AppColors.grey,
                 fontSize: 16,
               ),
             ),
@@ -339,7 +340,7 @@ class _BreadcrumbBar extends StatelessWidget {
       height: 48,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: Color(0xFF2E2E2E))),
+        border: Border(bottom: BorderSide(color: AppColors.cardBorder)),
       ),
       child: Row(
         children: [
@@ -347,21 +348,21 @@ class _BreadcrumbBar extends StatelessWidget {
           if (sidebarCollapsed)
             IconButton(
               icon: const Icon(Icons.keyboard_double_arrow_right,
-                  color: Color(0xFF888888), size: 20),
+                  color: AppColors.grey, size: 20),
               onPressed: onExpandSidebar,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
             ),
 
-          const Icon(Icons.home_outlined, color: Color(0xFF888888), size: 17),
+          const Icon(Icons.home_outlined, color: AppColors.grey, size: 17),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 6),
-            child: Text('›', style: TextStyle(color: Color(0xFF555555))),
+            child: Text('›', style: TextStyle(color: AppColors.greyDark)),
           ),
           const Text(
             '01 – Orientation',
             style: TextStyle(
-              color: Color(0xFFFF6B4A),
+              color: AppColors.green,
               fontSize: 13,
               fontWeight: FontWeight.w500,
             ),

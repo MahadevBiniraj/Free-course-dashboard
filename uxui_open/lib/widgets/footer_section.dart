@@ -19,7 +19,7 @@ class FooterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF0A0A0A), // Matched with dashboard background
+      color: AppColors.background, // Matched with dashboard background
       padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 40),
       child: Column(
         children: [

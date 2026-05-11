@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/dashboard_screen.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   runApp(const UXUIOpenApp());
@@ -15,10 +16,10 @@ class UXUIOpenApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF0A0A0A),
+        scaffoldBackgroundColor: AppColors.background,
         colorScheme: const ColorScheme.dark(
-          primary: Color(0xFF00FF7F),
-          surface: Color(0xFF111111),
+          primary: AppColors.green,
+          surface: AppColors.cardBackground,
         ),
         fontFamily: 'Roboto',
       ),

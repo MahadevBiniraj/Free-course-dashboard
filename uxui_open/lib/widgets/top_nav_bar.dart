@@ -12,7 +12,7 @@ class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       height: 72,
       decoration: const BoxDecoration(
-        color: Color(0xFF0A0A0A), // Matched with background
+        color: AppColors.background, // Matched with background
         border: Border(bottom: BorderSide(color: AppColors.cardBorder, width: 1.5)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 32),

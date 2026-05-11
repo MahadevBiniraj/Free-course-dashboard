@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 import '../widgets/top_nav_bar.dart';
 import '../widgets/hero_section.dart';
 import '../widgets/learning_cards_row.dart';
@@ -13,7 +14,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0A),
+      backgroundColor: AppColors.background,
       appBar: const TopNavBar(),
       body: SingleChildScrollView(
         child: Column(
