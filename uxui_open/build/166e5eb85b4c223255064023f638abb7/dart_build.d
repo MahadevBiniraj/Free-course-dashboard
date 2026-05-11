@@ -1,0 +1,1 @@
+ F:\\Free\ course\ dashboard\\uxui_open\\build\\166e5eb85b4c223255064023f638abb7\\dart_build_result.json:  C:\\Flutter\\flutter\\bin\\cache\\dart-sdk\\version F:\\Free\ course\ dashboard\\uxui_open\\.dart_tool\\package_config.json F:\\Free\ course\ dashboard\\uxui_open\\pubspec.yaml f:\\free\ course\ dashboard\\uxui_open\\.dart_tool\\package_config.json
