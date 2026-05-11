@@ -59,6 +59,30 @@ const List<CourseSection> kSections = [
   CourseSection(title: '10 – Low Fidelity Prototyping'),
 ];
 
+// ─── Orientation cards data ───────────────────────────────────────────────────
+
+const List<Map<String, String>> kCards = [
+  {
+    'title': '1.1 Welcome',
+    'subtitle': "Welcome to UX/UI Open! It's so great to have you here 😄",
+  },
+  {
+    'title': '1.2 Code of Conduct',
+    'subtitle':
+        'Slack access is a part of our Plus plan 🧡. The Slack section is fo...',
+  },
+  {
+    'title': '1.3 Slack 🎯',
+    'subtitle':
+        'By the end of this checkpoint, you should be able to join UX/UI ...',
+  },
+  {
+    'title': '1.4 Program Overview ⭐',
+    'subtitle':
+        'By the end of this checkpoint, you should be able to identify the...',
+  },
+];
+
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 class CourseNavPage extends StatefulWidget {
@@ -308,13 +332,42 @@ class _MainContent extends StatelessWidget {
 
         // ── Scrollable body ───────────────────────────────────────────────
         Expanded(
-          child: Center(
-            child: Text(
-              'Lesson content will appear here.',
-              style: TextStyle(
-                color: AppColors.grey,
-                fontSize: 16,
-              ),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(36, 28, 36, 36),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Title
+                const Text(
+                  '01 – Orientation',
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: -0.5,
+                  ),
+                ),
+                const SizedBox(height: 12),
+
+                // Subtitle
+                const Text(
+                  'Get started with the UX/UI Open curriculum and set yourself up with '
+                  'the best support system and network to ace your learning.',
+                  style: TextStyle(
+                    color: AppColors.greyLight,
+                    fontSize: 14,
+                    height: 1.5,
+                  ),
+                ),
+                const SizedBox(height: 32),
+
+                // 2-column card grid
+                _CardGrid(cards: kCards),
+                const SizedBox(height: 36),
+
+                // Prev / Next navigation
+                const _PrevNextBar(),
+              ],
             ),
           ),
         ),
@@ -368,6 +421,140 @@ class _BreadcrumbBar extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ─── Card Grid ────────────────────────────────────────────────────────────────
+
+class _CardGrid extends StatelessWidget {
+  final List<Map<String, String>> cards;
+  const _CardGrid({required this.cards});
+
+  @override
+  Widget build(BuildContext context) {
+    // Responsive: 2 columns on wide, 1 on narrow
+    return LayoutBuilder(builder: (ctx, constraints) {
+      final cols = constraints.maxWidth > 520 ? 2 : 1;
+      final rows = (cards.length / cols).ceil();
+
+      return Column(
+        children: List.generate(rows, (r) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Row(
+              children: List.generate(cols, (c) {
+                final idx = r * cols + c;
+                if (idx >= cards.length)
+                  return const Expanded(child: SizedBox());
+                return Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: c == 1 ? 16 : 0),
+                    child: _LessonCard(data: cards[idx]),
+                  ),
+                );
+              }),
+            ),
+          );
+        }),
+      );
+    });
+  }
+}
+
+class _LessonCard extends StatelessWidget {
+  final Map<String, String> data;
+  const _LessonCard({required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppColors.cardBorder),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.insert_drive_file_outlined,
+                  color: AppColors.grey, size: 16),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  data['title']!,
+                  style: const TextStyle(
+                    color: AppColors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            data['subtitle']!,
+            style: const TextStyle(
+              color: AppColors.grey,
+              fontSize: 13,
+              height: 1.4,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ─── Prev / Next Bar ─────────────────────────────────────────────────────────
+
+class _PrevNextBar extends StatelessWidget {
+  const _PrevNextBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+            child: _NavButton(
+                label: '« UX/UI Course Intro', align: TextAlign.left)),
+        const SizedBox(width: 16),
+        Expanded(
+            child: _NavButton(label: '1.1 Welcome »', align: TextAlign.right)),
+      ],
+    );
+  }
+}
+
+class _NavButton extends StatelessWidget {
+  final String label;
+  final TextAlign align;
+  const _NavButton({required this.label, required this.align});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      decoration: BoxDecoration(
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.cardBorder),
+      ),
+      child: Text(
+        label,
+        textAlign: align,
+        style: const TextStyle(
+          color: AppColors.greyLight,
+          fontSize: 13.5,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
