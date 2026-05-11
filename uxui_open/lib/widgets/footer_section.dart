@@ -19,8 +19,8 @@ class FooterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF0D0D0D),
-      padding: const EdgeInsets.all(32),
+      color: const Color(0xFF0A0A0A), // Matched with dashboard background
+      padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 40),
       child: Column(
         children: [
           Row(
@@ -34,33 +34,33 @@ class FooterSection extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          width: 28,
-                          height: 28,
+                          width: 32,
+                          height: 32,
                           decoration: BoxDecoration(
                             border: Border.all(color: AppColors.green, width: 1.5),
-                            borderRadius: BorderRadius.circular(6),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Icon(Icons.all_inclusive, color: AppColors.green, size: 16),
+                          child: const Icon(Icons.all_inclusive, color: AppColors.green, size: 18),
                         ),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 12),
                         const Text('UX/UI Open',
-                            style: TextStyle(color: AppColors.white, fontSize: 14, fontWeight: FontWeight.w600)),
+                            style: TextStyle(color: AppColors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                       ],
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 16),
                     const Text(
                       'Empowering learners to build\ncareer-ready portfolios and\nreal-world experience.',
-                      style: TextStyle(color: AppColors.grey, fontSize: 12, height: 1.6),
+                      style: TextStyle(color: AppColors.greyLight, fontSize: 14, height: 1.6),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 24),
                     Row(
                       children: [
                         _socialIcon(Icons.camera_alt_outlined),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 12),
                         _socialIcon(Icons.link),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 12),
                         _socialIcon(Icons.play_circle_outline),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 12),
                         _socialIcon(Icons.forum_outlined),
                       ],
                     ),
@@ -111,23 +111,23 @@ class FooterSection extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 40),
+          const Divider(color: AppColors.cardBorder, height: 1),
           const SizedBox(height: 24),
-          const Divider(color: AppColors.cardBorder),
-          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text('© 2025 The Open Bootcamp. All rights reserved.',
-                  style: TextStyle(color: AppColors.grey, fontSize: 11)),
+                  style: TextStyle(color: AppColors.grey, fontSize: 13)),
               Row(
                 children: const [
-                  Text('Made with ', style: TextStyle(color: AppColors.grey, fontSize: 11)),
-                  Icon(Icons.favorite, color: Colors.red, size: 11),
-                  Text(' by Open Bootcamp', style: TextStyle(color: AppColors.grey, fontSize: 11)),
+                  Text('Made with ', style: TextStyle(color: AppColors.grey, fontSize: 13)),
+                  Icon(Icons.favorite, color: Colors.red, size: 13),
+                  Text(' by Open Bootcamp', style: TextStyle(color: AppColors.grey, fontSize: 13)),
                 ],
               ),
               const Text('Trusted by 10K+ Students',
-                  style: TextStyle(color: AppColors.grey, fontSize: 11)),
+                  style: TextStyle(color: AppColors.grey, fontSize: 13)),
             ],
           ),
         ],
@@ -153,23 +153,24 @@ class _FooterColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title,
-            style: const TextStyle(color: AppColors.white, fontSize: 13, fontWeight: FontWeight.w600)),
-        const SizedBox(height: 12),
+            style: const TextStyle(color: AppColors.white, fontSize: 15, fontWeight: FontWeight.w600)),
+        const SizedBox(height: 16),
         ...items.map((item) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 children: [
-                  Text(item.text, style: const TextStyle(color: AppColors.grey, fontSize: 12)),
+                  Text(item.text, style: const TextStyle(color: AppColors.greyLight, fontSize: 14)),
                   if (item.badge != null) ...[
-                    const SizedBox(width: 6),
+                    const SizedBox(width: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         border: Border.all(color: AppColors.green),
                         borderRadius: BorderRadius.circular(4),
+                        color: AppColors.green.withOpacity(0.1),
                       ),
                       child: Text(item.badge!,
-                          style: const TextStyle(color: AppColors.green, fontSize: 9, fontWeight: FontWeight.w600)),
+                          style: const TextStyle(color: AppColors.green, fontSize: 10, fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ],

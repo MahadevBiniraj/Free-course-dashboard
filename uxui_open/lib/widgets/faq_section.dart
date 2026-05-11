@@ -23,39 +23,39 @@ class _FAQSectionState extends State<FAQSection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(
         children: [
           // Header
           const Text('LEARNER FAQ', style: AppTextStyles.label),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           const Text('Frequently Asked Questions',
-              style: TextStyle(color: AppColors.white, fontSize: 26, fontWeight: FontWeight.bold),
+              style: TextStyle(color: AppColors.white, fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: -0.5),
               textAlign: TextAlign.center),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           RichText(
             textAlign: TextAlign.center,
             text: const TextSpan(
               children: [
                 TextSpan(
                     text: "Got more questions? We'd be happy to hear you at\n",
-                    style: TextStyle(color: AppColors.grey, fontSize: 13)),
+                    style: TextStyle(color: AppColors.grey, fontSize: 15, height: 1.6)),
                 TextSpan(
                     text: 'uxui@theopenbootcamp.com',
-                    style: TextStyle(color: AppColors.green, fontSize: 13)),
+                    style: TextStyle(color: AppColors.green, fontSize: 15, fontWeight: FontWeight.w600)),
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 32),
           // FAQ items
           ...List.generate(_faqs.length, (index) {
             final isExpanded = _expandedIndex == index;
             return Container(
-              margin: const EdgeInsets.only(bottom: 8),
+              margin: const EdgeInsets.only(bottom: 12),
               decoration: BoxDecoration(
                 color: AppColors.cardBackground,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.cardBorder),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.cardBorder, width: 1.5),
               ),
               child: InkWell(
                 onTap: () {
@@ -63,9 +63,9 @@ class _FAQSectionState extends State<FAQSection> {
                     _expandedIndex = isExpanded ? null : index;
                   });
                 },
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(12),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -73,34 +73,34 @@ class _FAQSectionState extends State<FAQSection> {
                         children: [
                           Text(
                             '${(index + 1).toString().padLeft(2, '0')}',
-                            style: const TextStyle(color: AppColors.grey, fontSize: 12, fontWeight: FontWeight.w600),
+                            style: const TextStyle(color: AppColors.green, fontSize: 14, fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(width: 16),
+                          const SizedBox(width: 20),
                           Expanded(
                             child: Text(_faqs[index]['q']!,
-                                style: const TextStyle(color: AppColors.white, fontSize: 14)),
+                                style: const TextStyle(color: AppColors.white, fontSize: 16, fontWeight: FontWeight.w600)),
                           ),
                           Container(
-                            width: 22,
-                            height: 22,
+                            width: 28,
+                            height: 28,
                             decoration: BoxDecoration(
                               border: Border.all(color: AppColors.greyDark),
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(6),
                             ),
                             child: Icon(
                               isExpanded ? Icons.remove : Icons.add,
-                              color: AppColors.greyLight,
-                              size: 14,
+                              color: AppColors.white,
+                              size: 16,
                             ),
                           ),
                         ],
                       ),
                       if (isExpanded) ...[
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 16),
                         Padding(
-                          padding: const EdgeInsets.only(left: 32),
+                          padding: const EdgeInsets.only(left: 38),
                           child: Text(_faqs[index]['a']!,
-                              style: const TextStyle(color: AppColors.grey, fontSize: 13, height: 1.5)),
+                              style: const TextStyle(color: AppColors.greyLight, fontSize: 14, height: 1.6)),
                         ),
                       ],
                     ],

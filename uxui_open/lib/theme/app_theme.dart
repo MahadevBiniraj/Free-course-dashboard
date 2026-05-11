@@ -17,44 +17,49 @@ class AppColors {
 class AppTextStyles {
   static const heading1 = TextStyle(
     color: AppColors.white,
-    fontSize: 28,
-    fontWeight: FontWeight.w700,
+    fontSize: 34,
+    fontWeight: FontWeight.w800,
     height: 1.2,
+    letterSpacing: -0.5,
   );
 
   static const heading2 = TextStyle(
     color: AppColors.white,
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: FontWeight.w700,
+    letterSpacing: -0.3,
   );
 
   static const heading3 = TextStyle(
     color: AppColors.white,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: FontWeight.w600,
+    letterSpacing: -0.2,
   );
 
   static const body = TextStyle(
     color: AppColors.greyLight,
-    fontSize: 13,
-    height: 1.5,
+    fontSize: 15,
+    height: 1.6,
   );
 
   static const label = TextStyle(
     color: AppColors.green,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     letterSpacing: 0.5,
   );
 
   static const statNumber = TextStyle(
     color: AppColors.white,
-    fontSize: 24,
-    fontWeight: FontWeight.w700,
+    fontSize: 32,
+    fontWeight: FontWeight.w800,
+    letterSpacing: -1.0,
   );
 
   static const statLabel = TextStyle(
     color: AppColors.grey,
-    fontSize: 12,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
   );
 }

@@ -7,7 +7,7 @@ class ActionCardsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Row(
         children: [
           Expanded(
@@ -19,7 +19,7 @@ class ActionCardsRow extends StatelessWidget {
               decorationWidget: _TrophyDecoration(),
             ),
           ),
-          const SizedBox(width: 14),
+          const SizedBox(width: 24),
           Expanded(
             child: _ActionCard(
               icon: Icons.people_outline,
@@ -29,7 +29,7 @@ class ActionCardsRow extends StatelessWidget {
               decorationWidget: _PeopleDecoration(),
             ),
           ),
-          const SizedBox(width: 14),
+          const SizedBox(width: 24),
           Expanded(
             child: _ActionCard(
               icon: Icons.flash_on_outlined,
@@ -63,45 +63,52 @@ class _ActionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 220,
+      height: 260,
       decoration: BoxDecoration(
         color: AppColors.cardBackground,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColors.cardBorder),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.cardBorder, width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
           // Background decoration
           Positioned(
-            right: 0,
-            bottom: 40,
+            right: -20,
+            bottom: -10,
             child: decorationWidget,
           ),
           // Content
           Padding(
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.all(28),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: AppColors.greenDim,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Icon(icon, color: AppColors.green, size: 20),
+                  child: Icon(icon, color: AppColors.green, size: 24),
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 20),
                 Text(title, style: AppTextStyles.heading3),
-                const SizedBox(height: 6),
+                const SizedBox(height: 8),
                 Text(description, style: AppTextStyles.body),
                 const Spacer(),
                 Row(
                   children: [
                     Text(linkText, style: AppTextStyles.label),
-                    const SizedBox(width: 4),
-                    const Icon(Icons.arrow_forward, color: AppColors.green, size: 13),
+                    const SizedBox(width: 6),
+                    const Icon(Icons.arrow_forward, color: AppColors.green, size: 16),
                   ],
                 ),
               ],
