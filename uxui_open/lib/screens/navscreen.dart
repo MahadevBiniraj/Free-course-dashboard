@@ -99,7 +99,7 @@ class _CourseNavPageState extends State<CourseNavPage> {
   String _selectedLesson = '01 - Orientation';
   bool _sidebarCollapsed = false;
 
-  static const double kSidebarWidth = 270;
+  static const double kSidebarWidth = 320;
   static const double kCollapsedWidth = 0;
 
   @override
@@ -212,14 +212,14 @@ class _PhaseHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Text(
-        title,
+        title.toUpperCase(),
         style: const TextStyle(
           color: AppColors.greyLight,
-          fontSize: 13,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 0.2,
+          fontSize: 12,
+          fontWeight: FontWeight.w800,
+          letterSpacing: 1.5,
         ),
       ),
     );
@@ -261,9 +261,9 @@ class _SectionTile extends StatelessWidget {
                     section.title,
                     style: TextStyle(
                       color: isExpanded ? accent : AppColors.greyLight,
-                      fontSize: 13.5,
+                      fontSize: 15,
                       fontWeight:
-                          isExpanded ? FontWeight.w600 : FontWeight.w400,
+                          isExpanded ? FontWeight.w700 : FontWeight.w500,
                     ),
                   ),
                 ),
@@ -288,16 +288,15 @@ class _SectionTile extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 32, vertical: 9),
                 decoration: BoxDecoration(
-                  color:
-                      isSelected ? AppColors.greenDim : Colors.transparent,
+                  color: isSelected ? AppColors.greenDim : Colors.transparent,
                 ),
                 child: Text(
                   lesson,
                   style: TextStyle(
                     color: isSelected ? AppColors.white : AppColors.greyLight,
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight:
-                        isSelected ? FontWeight.w500 : FontWeight.normal,
+                        isSelected ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
               ),
@@ -342,9 +341,9 @@ class _MainContent extends StatelessWidget {
                   '01 – Orientation',
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: -0.5,
+                    fontSize: 38,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -1.0,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -355,8 +354,8 @@ class _MainContent extends StatelessWidget {
                   'the best support system and network to ace your learning.',
                   style: TextStyle(
                     color: AppColors.greyLight,
-                    fontSize: 14,
-                    height: 1.5,
+                    fontSize: 16,
+                    height: 1.6,
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -416,8 +415,8 @@ class _BreadcrumbBar extends StatelessWidget {
             '01 – Orientation',
             style: TextStyle(
               color: AppColors.green,
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],
@@ -489,8 +488,8 @@ class _LessonCard extends StatelessWidget {
                   data['title']!,
                   style: const TextStyle(
                     color: AppColors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
@@ -500,9 +499,9 @@ class _LessonCard extends StatelessWidget {
           Text(
             data['subtitle']!,
             style: const TextStyle(
-              color: AppColors.grey,
-              fontSize: 13,
-              height: 1.4,
+              color: AppColors.greyLight,
+              fontSize: 14,
+              height: 1.6,
             ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -552,8 +551,8 @@ class _NavButton extends StatelessWidget {
         textAlign: align,
         style: const TextStyle(
           color: AppColors.greyLight,
-          fontSize: 13.5,
-          fontWeight: FontWeight.w500,
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );

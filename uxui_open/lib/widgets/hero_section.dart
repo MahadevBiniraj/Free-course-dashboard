@@ -19,9 +19,9 @@ class HeroSection extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text('WELCOME BACK, USER ',
+                    const Text('WELCOME BACK, ARUN ',
                         style: AppTextStyles.label),
-                    const Text('👋', style: TextStyle(fontSize: 16)),
+                    const Text('👏', style: TextStyle(fontSize: 16)),
                   ],
                 ),
                 const SizedBox(height: 16),
