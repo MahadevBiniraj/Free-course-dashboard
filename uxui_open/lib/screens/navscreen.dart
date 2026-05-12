@@ -162,7 +162,38 @@ class _SidebarContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Sidebar Header (Logo and Title)
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          decoration: const BoxDecoration(
+            border: Border(bottom: BorderSide(color: AppColors.cardBorder)),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.green, width: 1.5),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Icon(Icons.all_inclusive, color: AppColors.green, size: 18),
+              ),
+              const SizedBox(width: 12),
+              const Text(
+                'UX/UI Open',
+                style: TextStyle(
+                  color: AppColors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -0.2,
+                ),
+              ),
+            ],
+          ),
+        ),
         // Scrollable nav list
         Expanded(
           child: ListView.builder(
