@@ -8,7 +8,13 @@ import 'lesson_content/orientation_lesson.dart';
 import 'lesson_content/program_overview_lesson.dart';
 import 'lesson_content/ux_fundamentals_overview_lesson.dart';
 import 'lesson_content/way_of_designer_lesson.dart';
+import 'lesson_content/your_career_lesson.dart';
 import 'lesson_content/design_thinking_lesson.dart';
+import 'lesson_content/understanding_users_lesson.dart';
+import 'lesson_content/visuals_lesson.dart';
+import 'lesson_content/designing_for_everyone_lesson.dart';
+import 'lesson_content/design_process_lesson.dart';
+import 'lesson_content/design_foundations_lesson.dart';
 import 'lesson_content/placeholder_lesson.dart';
 
 void main() {
@@ -136,8 +142,38 @@ class _MainContentRouter extends StatelessWidget {
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
         );
+      case '2.2 Your Career':
+        return YourCareerLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+        );
       case '2.3 Design Thinking ⭐':
         return DesignThinkingLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+        );
+      case '2.4 Understanding Users':
+        return UnderstandingUsersLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+        );
+      case '2.5 The Visuals':
+        return VisualsLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+        );
+      case '2.6 Designing For Everyone':
+        return DesigningForEveryoneLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+        );
+      case '2.7 Design Process 🎉📞':
+        return DesignProcessLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+        );
+      case '2.8 Design Foundations':
+        return DesignFoundationsLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
         );

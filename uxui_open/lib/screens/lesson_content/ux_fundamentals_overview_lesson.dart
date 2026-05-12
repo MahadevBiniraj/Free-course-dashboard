@@ -53,7 +53,29 @@ class UXFundamentalsOverviewLesson extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 32),
-                const CardGrid(cards: kUXFundamentalsCards),
+                
+                // ── Vertical Lesson List ─────────────────────────────────────
+                const Text(
+                  'Lessons in this module:',
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                
+                ...kSections[1].lessons.asMap().entries.map((entry) {
+                  final title = entry.value;
+                  final isActive = title == '2.1 The Way Of The Designer ⭐';
+                  
+                  return LessonTile(
+                    title: title,
+                    isActive: isActive,
+                    onTap: () {},
+                  );
+                }).toList(),
+
                 const SizedBox(height: 36),
                 const PrevNextBar(
                   prevLabel: '« 01 - Orientation',

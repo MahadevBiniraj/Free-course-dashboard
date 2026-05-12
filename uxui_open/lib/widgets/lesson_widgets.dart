@@ -182,3 +182,74 @@ Widget buildBulletPointRich(List<TextSpan> spans) {
     ),
   );
 }
+
+class LessonTile extends StatelessWidget {
+  final String title;
+  final bool isActive;
+  final VoidCallback? onTap;
+
+  const LessonTile({
+    super.key,
+    required this.title,
+    this.isActive = false,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          decoration: BoxDecoration(
+            color: isActive ? AppColors.greenDim.withAlpha(50) : AppColors.cardBackground,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: isActive ? AppColors.green.withAlpha(120) : AppColors.cardBorder,
+              width: isActive ? 1.5 : 1.0,
+            ),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                isActive ? Icons.play_circle_fill : Icons.insert_drive_file_outlined,
+                color: isActive ? AppColors.green : AppColors.grey,
+                size: 20,
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: isActive ? AppColors.white : AppColors.greyLight,
+                    fontSize: 16,
+                    fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+                  ),
+                ),
+              ),
+              if (isActive)
+                const Text(
+                  'ACTIVE',
+                  style: TextStyle(
+                    color: AppColors.green,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              const SizedBox(width: 8),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: isActive ? AppColors.green : AppColors.greyDark,
+                size: 14,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
