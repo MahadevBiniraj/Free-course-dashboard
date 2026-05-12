@@ -46,7 +46,16 @@ const List<CourseSection> kSections = [
     '1.3 Slack 🎯',
     '1.4 Program Overview ⭐',
   ]),
-  CourseSection(title: '02 – UX Fundamentals'),
+  CourseSection(title: '02 – UX Fundamentals', lessons: [
+    '2.1 The Way Of The Designer ⭐',
+    '2.2 Your Career',
+    '2.3 Design Thinking ⭐',
+    '2.4 Understanding Users',
+    '2.5 The Visuals',
+    '2.6 Designing For Everyone',
+    '2.7 Design Process 🎉📞',
+    '2.8 Design Foundations',
+  ]),
   CourseSection(title: '03 – User Centered Design'),
   CourseSection(title: '04 – Visual Design'),
   CourseSection(title: 'UX Intensive Phase 🏛', isPhaseHeader: true),
@@ -277,10 +286,25 @@ class _SectionTile extends StatelessWidget {
     required this.onLessonTap,
   });
 
+  // Determine accent color based on section
+  static const _coralAccent = Color(0xFFE85D75);
+  static const _coralDim = Color(0xFF2A1F2D);
+
+  Color get _accent {
+    if (section.title.startsWith('01')) return AppColors.green;
+    return _coralAccent;
+  }
+
+  Color get _dimBg {
+    if (section.title.startsWith('01')) return AppColors.greenDim;
+    return _coralDim;
+  }
+
   @override
   Widget build(BuildContext context) {
     final hasLessons = section.lessons.isNotEmpty;
-    const accent = AppColors.green;
+    final accent = _accent;
+    final dimBg = _dimBg;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -288,8 +312,14 @@ class _SectionTile extends StatelessWidget {
         // Section header row
         InkWell(
           onTap: onTap,
+          borderRadius: BorderRadius.circular(8),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              color: isExpanded ? dimBg : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Row(
               children: [
                 Expanded(
@@ -304,10 +334,14 @@ class _SectionTile extends StatelessWidget {
                   ),
                 ),
                 if (hasLessons)
-                  Icon(
-                    isExpanded ? Icons.expand_more : Icons.chevron_right,
-                    color: isExpanded ? accent : AppColors.grey,
-                    size: 18,
+                  AnimatedRotation(
+                    turns: isExpanded ? 0.25 : 0,
+                    duration: const Duration(milliseconds: 200),
+                    child: Icon(
+                      Icons.chevron_right,
+                      color: isExpanded ? accent : AppColors.grey,
+                      size: 18,
+                    ),
                   ),
               ],
             ),
@@ -316,27 +350,51 @@ class _SectionTile extends StatelessWidget {
 
         // Lesson list (expanded)
         if (isExpanded && hasLessons)
-          ...section.lessons.map((lesson) {
-            final isSelected = selectedLesson == lesson;
-            return InkWell(
-              onTap: () => onLessonTap(lesson),
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 9),
-                decoration: BoxDecoration(
-                  color: isSelected ? AppColors.greenDim : Colors.transparent,
-                ),
-                child: Text(
-                  lesson,
-                  style: TextStyle(
-                    color: isSelected ? AppColors.white : AppColors.greyLight,
-                    fontSize: 14,
-                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+          Padding(
+            padding: const EdgeInsets.only(top: 4, bottom: 4),
+            child: Column(
+              children: section.lessons.map((lesson) {
+                final isSelected = selectedLesson == lesson;
+                return InkWell(
+                  onTap: () => onLessonTap(lesson),
+                  borderRadius: BorderRadius.circular(6),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 1),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: isSelected ? dimBg : Colors.transparent,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Row(
+                      children: [
+                        if (isSelected)
+                          Container(
+                            width: 3,
+                            height: 16,
+                            margin: const EdgeInsets.only(right: 10),
+                            decoration: BoxDecoration(
+                              color: accent,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                        Expanded(
+                          child: Text(
+                            lesson,
+                            style: TextStyle(
+                              color: isSelected ? accent : AppColors.greyLight,
+                              fontSize: 14,
+                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
-            );
-          }),
+                );
+              }).toList(),
+            ),
+          ),
       ],
     );
   }
@@ -373,6 +431,27 @@ class _MainContent extends StatelessWidget {
     
     if (selectedLesson == '01 - Orientation') {
       return _OrientationContent(
+        sidebarCollapsed: sidebarCollapsed,
+        onExpandSidebar: onExpandSidebar,
+      );
+    }
+    
+    if (selectedLesson == '1.4 Program Overview ⭐') {
+      return _ProgramOverviewContent(
+        sidebarCollapsed: sidebarCollapsed,
+        onExpandSidebar: onExpandSidebar,
+      );
+    }
+
+    if (selectedLesson == '02 – UX Fundamentals') {
+      return _UXFundamentalsOverviewContent(
+        sidebarCollapsed: sidebarCollapsed,
+        onExpandSidebar: onExpandSidebar,
+      );
+    }
+
+    if (selectedLesson == '2.1 The Way Of The Designer ⭐') {
+      return _WayOfDesignerContent(
         sidebarCollapsed: sidebarCollapsed,
         onExpandSidebar: onExpandSidebar,
       );
@@ -1084,6 +1163,960 @@ class _CodeOfConductBreadcrumbBar extends StatelessWidget {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+// ─── Program Overview Content ──────────────────────────────────────────────────
+
+class _ProgramOverviewContent extends StatelessWidget {
+  final bool sidebarCollapsed;
+  final VoidCallback onExpandSidebar;
+
+  const _ProgramOverviewContent({
+    required this.sidebarCollapsed,
+    required this.onExpandSidebar,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _ProgramOverviewBreadcrumbBar(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(36, 28, 36, 36),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.cardBackground,
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: AppColors.cardBorder),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'On this page',
+                        style: TextStyle(color: AppColors.greyLight, fontSize: 15),
+                      ),
+                      Icon(Icons.keyboard_arrow_down, color: AppColors.greyLight),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  '1.4 Program Overview ⭐',
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 38,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -1.0,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                
+                // Success criteria box
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: AppColors.green.withOpacity(0.1),
+                    border: Border.all(color: AppColors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: const [
+                          Icon(Icons.flag_outlined, color: AppColors.green, size: 20),
+                          SizedBox(width: 8),
+                          Text(
+                            'Success criteria',
+                            style: TextStyle(
+                              color: AppColors.green,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'By the end of this checkpoint, you should be able to identify the core aspects of our program and successfully submit your first checkpoint!',
+                        style: TextStyle(color: AppColors.white, fontSize: 15, height: 1.5),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.white,
+                          foregroundColor: Colors.black,
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                        ),
+                        child: const Text('Mark as done', style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                
+                // Time
+                Row(
+                  children: const [
+                    Icon(Icons.access_time, color: AppColors.greyLight, size: 18),
+                    SizedBox(width: 8),
+                    Text(
+                      'Time: 1 hr 0 mins',
+                      style: TextStyle(color: AppColors.greyLight, fontSize: 15),
+                    ),
+                    SizedBox(width: 16),
+                    Icon(Icons.info_outline, color: AppColors.greyLight, size: 18),
+                  ],
+                ),
+                const SizedBox(height: 32),
+                
+                // Overview Video
+                const Text(
+                  'Overview',
+                  style: TextStyle(color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  width: double.infinity,
+                  height: 400,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.network(
+                        'https://picsum.photos/800/400?1',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: 400,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 400,
+                        color: Colors.black.withOpacity(0.3),
+                      ),
+                      const Icon(Icons.play_circle_fill, color: Colors.white, size: 64),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'An overview essential for all our students, full of valuable info on what you\'ll learn, how to complete this program, and best practices. Highly recommended you watch it fully before starting the program. ☝',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 15, height: 1.5),
+                ),
+                const SizedBox(height: 32),
+
+                // Dashboard and curriculum overview
+                const Text(
+                  'Dashboard and curriculum overview',
+                  style: TextStyle(color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'UX/UI Open\'s premium curriculum is structured carefully to take you from a total beginner with no prior experience to a hired junior UI/UX designer. Your curriculum covers the main UX/UI design processes across the following phases:',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                ),
+                const SizedBox(height: 32),
+
+                // Lesson types and assignments
+                const Text(
+                  'Lesson types and assignments',
+                  style: TextStyle(color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'To ensure that you properly engage with your coursework, we alternate heavily between theory, exercises and projects. There are basically five forms of interaction for every user on our platform at Open Bootcamp:',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                ),
+                const SizedBox(height: 24),
+                
+                _bulletItem('1. Reading Lessons', 'These act exactly like what you are doing right now. Talk to basically teach you concept about certain topics covered here over our platform.'),
+                _bulletItem('2. Activity Lessons 🎯', 'Activity lessons are exactly as the name suggests... We\'ll be testing what you\'ve read over reading assignments through short fun activity assignments...'),
+                _bulletItem('3. Self Appraised Assignments ⭐', 'These assignments are basic assignments... you appraise yourself if you got the answer correctly after clicking on the Mark as Done button...'),
+                _bulletItem('4. Student Assignments 🎓', 'There are specific assignments that needs to be officially appraised and graded by us to determine if you are ready to move on. These assignments must be submitted to us and will be strictly reviewed and critiqued...'),
+                _bulletItem('5. Capstone Projects', 'Capstone projects refer to projects that will be used to enhance your resume when you are done with the course...'),
+                
+                const SizedBox(height: 32),
+
+                // Careers course
+                const Text(
+                  'Careers course',
+                  style: TextStyle(color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'In addition to the UX/UI content, all Open Bootcamp premium users have access to our Career program.',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                ),
+                const SizedBox(height: 12),
+                RichText(
+                  text: const TextSpan(
+                    style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                    children: [
+                      TextSpan(text: 'Please note: your job search starts on '),
+                      TextSpan(text: 'Day One', style: TextStyle(color: Color(0xFFE85D75), fontWeight: FontWeight.bold)),
+                      TextSpan(text: ' of this program. UX/UI Open is partnered with The Career program provided by '),
+                      TextSpan(text: 'Open Bootcamp', style: TextStyle(color: Color(0xFFE85D75))),
+                      TextSpan(text: '. This career program teaches you everything you need to get a job in tech, including:'),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE5F1EB),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: Text(
+                          'Learn Software Development',
+                          style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: AppColors.green,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Text('Live', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                _bulletPoint('How to conduct an effective job search that will result in a tech job that you will genuinely enjoy'),
+                _bulletPoint('How to build a network of mentors and peers to lean on, learn from, and collaborate with as you progress throughout your new tech career'),
+                _bulletPoint('How to present yourself through your resume, LinkedIn profile, online portfolio, and other online presence in the best possible light'),
+                _bulletPoint('How to pass technical screens, take home assignments, and non-technical interviews'),
+                _bulletPoint('How to negotiate effectively and get paid what you are worth as a professional'),
+
+                const SizedBox(height: 32),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF7F7F7),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'A better way to learn coding',
+                        style: TextStyle(color: Colors.black, fontSize: 28, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 24),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Image.network('https://picsum.photos/400/300?2', fit: BoxFit.cover),
+                          ),
+                          const SizedBox(width: 24),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                _tag('Live'),
+                                const SizedBox(height: 12),
+                                _tag('Engaging'),
+                                const SizedBox(height: 12),
+                                _tag('Interactive'),
+                                const SizedBox(height: 12),
+                                _tag('Project Based'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'webdevopen.com',
+                        style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 32),
+
+                // Graduation
+                const Text(
+                  'Graduation',
+                  style: TextStyle(color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                RichText(
+                  text: const TextSpan(
+                    style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                    children: [
+                      TextSpan(text: 'Due to the rigorous and practical nature of this program, completing the requirements for graduation is a major feat. Those who are successful in completing our full rigorous program will be officially recognized as certified '),
+                      TextSpan(text: 'Open Bootcamp', style: TextStyle(color: Color(0xFFE85D75))),
+                      TextSpan(text: ' Graduates.'),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                RichText(
+                  text: const TextSpan(
+                    style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                    children: [
+                      TextSpan(text: 'Upon completing your graduation requirements, you will be directed to a checkout process where you can apply your final payment in exchange for your hard-earned UX/UI Certificate. Most users do end up completing the program in less than 4 months and end up spending just a little around '),
+                      TextSpan(text: '\$100 - \$200', style: TextStyle(color: Color(0xFFE85D75), fontWeight: FontWeight.bold)),
+                      TextSpan(text: ' for this awesome program.'),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 32),
+
+                // Assignment 1
+                const Text(
+                  'Assignment 1 ⭐',
+                  style: TextStyle(color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'Are you ready for your first assignment? Your assignment is simple: Say Hello to your new community! If you haven\'t yet, join our workspace and head to the #01_introductions channel. We\'d like to hear about the following please:',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                ),
+                const SizedBox(height: 16),
+                _bulletPoint('Who are you? (Where you are from?)'),
+                _bulletPoint('Why did you enroll for the program? (Learning goals for this course)'),
+                _bulletPoint('What\'s a fun fact about you? (Optional)'),
+                const SizedBox(height: 16),
+                const Text(
+                  'This will be the standard format for communicating in this course moving forward. And remember, the more you put into this community, the more you get out. Say hi to someone new as you submit this simple assignment.',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                ),
+                
+                const SizedBox(height: 32),
+                const Text(
+                  'Submit lesson',
+                  style: TextStyle(color: AppColors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'If you have fully read and understood the assignment, please mark the assignment as done 🤩 on this screen to confirm you\'ve read these instructions and have officially completed your first lesson.',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                ),
+
+                const SizedBox(height: 32),
+                
+                const Text(
+                  'Ready to Join our design community of 7000+ members? 🤩',
+                  style: TextStyle(color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                const Text('If you haven\'t enrolled yet, here is a breakdown of what you\'ll unlock:', style: TextStyle(color: AppColors.greyLight, fontSize: 16)),
+                const SizedBox(height: 16),
+                _bulletPoint('Slack community access 💬'),
+                _bulletPoint('Valuable mentorship and feedback 💡'),
+                _bulletPoint('Group and real-life projects 🤝'),
+                _bulletPoint('Peer reviews 🧑‍🏫'),
+                _bulletPoint('Keep your access over your FULL student period 🤩'),
+                _bulletPoint('Our course updates you on the new trends etc. ✨'),
+                _bulletPoint('and much more ...'),
+                const SizedBox(height: 16),
+                RichText(
+                  text: const TextSpan(
+                    style: TextStyle(color: AppColors.greyLight, fontSize: 16),
+                    children: [
+                      TextSpan(text: 'Join us, you wouldn\'t regret your decision 🤝'),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 48),
+
+                const Row(
+                  children: [
+                    Expanded(child: _NavButton(label: '« 1.3 Slack 🎯', align: TextAlign.left)),
+                    SizedBox(width: 16),
+                    Expanded(child: _NavButton(label: 'Next: 1.5 Your First UI »', align: TextAlign.right)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _bulletItem(String title, String desc) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(color: AppColors.white, fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            desc,
+            style: const TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _bulletPoint(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 8, right: 12),
+            child: CircleAvatar(backgroundColor: AppColors.greyLight, radius: 3),
+          ),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _tag(String label) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF165C47),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        label,
+        style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+class _ProgramOverviewBreadcrumbBar extends StatelessWidget {
+  final bool sidebarCollapsed;
+  final VoidCallback onExpandSidebar;
+
+  const _ProgramOverviewBreadcrumbBar({
+    required this.sidebarCollapsed,
+    required this.onExpandSidebar,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 48,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: const BoxDecoration(
+        border: Border(bottom: BorderSide(color: AppColors.cardBorder)),
+      ),
+      child: Row(
+        children: [
+          if (sidebarCollapsed)
+            IconButton(
+              icon: const Icon(Icons.keyboard_double_arrow_right, color: AppColors.grey, size: 20),
+              onPressed: onExpandSidebar,
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+            ),
+          const Icon(Icons.home_outlined, color: AppColors.grey, size: 17),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6),
+            child: Text('›', style: TextStyle(color: AppColors.greyDark)),
+          ),
+          const Text(
+            '01 - Orientation',
+            style: TextStyle(color: AppColors.greyLight, fontSize: 14),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6),
+            child: Text('›', style: TextStyle(color: AppColors.greyDark)),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            decoration: BoxDecoration(
+              color: const Color(0xFF2A1F2D),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Text(
+              '1.4 Program Overview ⭐',
+              style: TextStyle(
+                color: Color(0xFFE85D75),
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ─── UX Fundamentals Overview Content ─────────────────────────────────────────
+
+const List<Map<String, String>> kUXFundamentalsCards = [
+  {
+    'title': '2.1 The Way Of The Designer ⭐',
+    'subtitle': 'Understand the mindset, approach, and daily life of a UX/UI designer...',
+  },
+  {
+    'title': '2.2 Your Career',
+    'subtitle': 'Explore career paths, job roles, and industry expectations for designers...',
+  },
+  {
+    'title': '2.3 Design Thinking ⭐',
+    'subtitle': 'Learn the core design thinking framework used by top companies worldwide...',
+  },
+  {
+    'title': '2.4 Understanding Users',
+    'subtitle': 'Deep dive into user research, personas, and empathy mapping techniques...',
+  },
+  {
+    'title': '2.5 The Visuals',
+    'subtitle': 'Explore visual hierarchy, color theory, typography and layout principles...',
+  },
+  {
+    'title': '2.6 Designing For Everyone',
+    'subtitle': 'Learn accessibility best practices and inclusive design principles...',
+  },
+  {
+    'title': '2.7 Design Process 🎉📞',
+    'subtitle': 'Master the end-to-end design process from research to final handoff...',
+  },
+  {
+    'title': '2.8 Design Foundations',
+    'subtitle': 'Build a solid foundation in design principles, grids, and systems...',
+  },
+];
+
+class _UXFundamentalsOverviewContent extends StatelessWidget {
+  final bool sidebarCollapsed;
+  final VoidCallback onExpandSidebar;
+
+  const _UXFundamentalsOverviewContent({
+    required this.sidebarCollapsed,
+    required this.onExpandSidebar,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _UXFundamentalsBreadcrumbBar(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+          lessonTitle: null,
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(36, 28, 36, 36),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '02 – UX Fundamentals',
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 38,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -1.0,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Discover the foundational principles of UX design. From understanding '
+                  'users to mastering design thinking — this module sets you up with the '
+                  'essential skills every designer needs.',
+                  style: TextStyle(
+                    color: AppColors.greyLight,
+                    fontSize: 16,
+                    height: 1.6,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                _CardGrid(cards: kUXFundamentalsCards),
+                const SizedBox(height: 36),
+                const Row(
+                  children: [
+                    Expanded(child: _NavButton(label: '« 01 - Orientation', align: TextAlign.left)),
+                    SizedBox(width: 16),
+                    Expanded(child: _NavButton(label: '2.1 The Way Of The Designer ⭐ »', align: TextAlign.right)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ─── Way Of The Designer Content ──────────────────────────────────────────────
+
+class _WayOfDesignerContent extends StatelessWidget {
+  final bool sidebarCollapsed;
+  final VoidCallback onExpandSidebar;
+
+  const _WayOfDesignerContent({
+    required this.sidebarCollapsed,
+    required this.onExpandSidebar,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _UXFundamentalsBreadcrumbBar(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+          lessonTitle: '2.1 The Way Of The Designer ⭐',
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(36, 28, 36, 36),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.cardBackground,
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: AppColors.cardBorder),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'On this page',
+                        style: TextStyle(color: AppColors.greyLight, fontSize: 15),
+                      ),
+                      Icon(Icons.keyboard_arrow_down, color: AppColors.greyLight),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  '2.1 The Way Of The Designer ⭐',
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 38,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -1.0,
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Success criteria
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE85D75).withOpacity(0.08),
+                    border: Border.all(color: const Color(0xFFE85D75)),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(Icons.flag_outlined, color: Color(0xFFE85D75), size: 20),
+                          SizedBox(width: 8),
+                          Text(
+                            'Success criteria',
+                            style: TextStyle(
+                              color: Color(0xFFE85D75),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'By the end of this checkpoint, you should understand the core mindset and approach of a UX/UI designer and how design thinking applies to everyday problem-solving.',
+                        style: TextStyle(color: AppColors.white, fontSize: 15, height: 1.5),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.white,
+                          foregroundColor: Colors.black,
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                        ),
+                        child: const Text('Mark as done', style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Time
+                const Row(
+                  children: [
+                    Icon(Icons.access_time, color: AppColors.greyLight, size: 18),
+                    SizedBox(width: 8),
+                    Text(
+                      'Time: 45 mins',
+                      style: TextStyle(color: AppColors.greyLight, fontSize: 15),
+                    ),
+                    SizedBox(width: 16),
+                    Icon(Icons.info_outline, color: AppColors.greyLight, size: 18),
+                  ],
+                ),
+                const SizedBox(height: 32),
+
+                // Section 1
+                const Text(
+                  'What is UX Design?',
+                  style: TextStyle(color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'User Experience (UX) Design is the process of creating products that provide meaningful, relevant, and enjoyable experiences to users. This involves the design of the entire process of acquiring and integrating the product, including aspects of branding, design, usability, and function.',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'UX design is not just about creating beautiful interfaces — it\'s about solving real problems for real people. Great designers think like detectives, researchers, and artists all rolled into one.',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                ),
+                const SizedBox(height: 32),
+
+                // Section 2
+                const Text(
+                  'The Designer Mindset',
+                  style: TextStyle(color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'To succeed as a designer, you need to develop a specific mindset. Here are the key principles:',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                ),
+                const SizedBox(height: 16),
+                _mindsetItem('Empathy First', 'Always put yourself in the user\'s shoes. Understand their frustrations, needs, and goals before jumping to solutions.'),
+                _mindsetItem('Iterate Constantly', 'Design is never done on the first try. Be willing to test, learn, and improve your designs continuously.'),
+                _mindsetItem('Stay Curious', 'The best designers are lifelong learners. Stay curious about new tools, trends, and methodologies.'),
+                _mindsetItem('Embrace Constraints', 'Real-world design always has constraints — budget, time, technology. Learn to see them as creative challenges.'),
+                _mindsetItem('Communicate Clearly', 'A designer who can\'t explain their decisions is only half effective. Practice articulating your design rationale.'),
+
+                const SizedBox(height: 32),
+
+                // Section 3
+                const Text(
+                  'A Day in the Life',
+                  style: TextStyle(color: AppColors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'What does a typical day look like for a UX/UI designer? While every company is different, most designers spend their time across these activities:',
+                  style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                ),
+                const SizedBox(height: 16),
+                _activityRow(Icons.search, 'Research', 'User interviews, surveys, competitive analysis'),
+                _activityRow(Icons.edit_note, 'Wireframing', 'Low-fidelity sketches and layout exploration'),
+                _activityRow(Icons.brush, 'Visual Design', 'High-fidelity mockups, color, typography'),
+                _activityRow(Icons.devices, 'Prototyping', 'Interactive prototypes for testing'),
+                _activityRow(Icons.people, 'Collaboration', 'Syncing with developers, PMs, stakeholders'),
+                _activityRow(Icons.science, 'Testing', 'Usability tests and design validation'),
+
+                const SizedBox(height: 48),
+
+                const Row(
+                  children: [
+                    Expanded(child: _NavButton(label: '« 02 – UX Fundamentals', align: TextAlign.left)),
+                    SizedBox(width: 16),
+                    Expanded(child: _NavButton(label: '2.2 Your Career »', align: TextAlign.right)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _mindsetItem(String title, String desc) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 4, right: 14),
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: const Color(0xFFE85D75).withOpacity(0.12),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: const Icon(Icons.auto_awesome, color: Color(0xFFE85D75), size: 16),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: const TextStyle(color: AppColors.white, fontSize: 17, fontWeight: FontWeight.w600)),
+                const SizedBox(height: 4),
+                Text(desc, style: const TextStyle(color: AppColors.greyLight, fontSize: 15, height: 1.5)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _activityRow(IconData icon, String title, String desc) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.cardBackground,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: AppColors.cardBorder),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xFF2A1F2D),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(icon, color: const Color(0xFFE85D75), size: 22),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: const TextStyle(color: AppColors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 4),
+                  Text(desc, style: const TextStyle(color: AppColors.greyLight, fontSize: 14)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─── UX Fundamentals Breadcrumb Bar ───────────────────────────────────────────
+
+class _UXFundamentalsBreadcrumbBar extends StatelessWidget {
+  final bool sidebarCollapsed;
+  final VoidCallback onExpandSidebar;
+  final String? lessonTitle;
+
+  const _UXFundamentalsBreadcrumbBar({
+    required this.sidebarCollapsed,
+    required this.onExpandSidebar,
+    required this.lessonTitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 48,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: const BoxDecoration(
+        border: Border(bottom: BorderSide(color: AppColors.cardBorder)),
+      ),
+      child: Row(
+        children: [
+          if (sidebarCollapsed)
+            IconButton(
+              icon: const Icon(Icons.keyboard_double_arrow_right, color: AppColors.grey, size: 20),
+              onPressed: onExpandSidebar,
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+            ),
+          const Icon(Icons.home_outlined, color: AppColors.grey, size: 17),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6),
+            child: Text('›', style: TextStyle(color: AppColors.greyDark)),
+          ),
+          if (lessonTitle != null) ...[
+            const Text(
+              '02 – UX Fundamentals',
+              style: TextStyle(color: AppColors.greyLight, fontSize: 14),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 6),
+              child: Text('›', style: TextStyle(color: AppColors.greyDark)),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                color: const Color(0xFF2A1F2D),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                lessonTitle!,
+                style: const TextStyle(
+                  color: Color(0xFFE85D75),
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ] else
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                color: const Color(0xFF2A1F2D),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Text(
+                '02 – UX Fundamentals',
+                style: TextStyle(
+                  color: Color(0xFFE85D75),
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
         ],
       ),
     );
