@@ -12,6 +12,8 @@ class AppColors {
   static const greyLight = Color(0xFFAAAAAA);
   static const greyDark = Color(0xFF333333);
   static const yellow = Color(0xFFFFD700);
+  static const coral = Color(0xFFE85D75);
+  static const coralDim = Color(0xFF2A1F2D);
 }
 
 class AppTextStyles {
