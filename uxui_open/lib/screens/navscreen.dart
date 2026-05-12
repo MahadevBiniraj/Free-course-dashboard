@@ -40,7 +40,7 @@ class CourseSection {
 }
 
 const List<CourseSection> kSections = [
-  CourseSection(title: 'UX/UI Course Intro', lessons: [
+  CourseSection(title: '01 - Orientation', lessons: [
     '1.1 Welcome',
     '1.2 Code of Conduct',
     '1.3 Slack 🎯',
@@ -96,7 +96,7 @@ class _CourseNavPageState extends State<CourseNavPage> {
   // Index of the expanded section (0 = Course Intro / Orientation)
   int _expandedIndex = 0;
   // Selected lesson inside the expanded section
-  String _selectedLesson = '01 - Orientation';
+  String _selectedLesson = '1.1 Welcome';
   bool _sidebarCollapsed = false;
 
   static const double kSidebarWidth = 320;
