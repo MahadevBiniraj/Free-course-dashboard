@@ -6,11 +6,13 @@ import '../../widgets/lesson_widgets.dart';
 class YourCareerLesson extends StatelessWidget {
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const YourCareerLesson({
     super.key,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
@@ -49,9 +51,11 @@ class YourCareerLesson extends StatelessWidget {
                 buildBulletPoint('Product Designer: A holistic role covering both UX and UI, often involved in business strategy.'),
                 buildBulletPoint('Interaction Designer: Focuses on how a user interacts with a product, specifically transitions and animations.'),
                 const SizedBox(height: 48),
-                const PrevNextBar(
+                PrevNextBar(
                   prevLabel: '« 2.1 The Way Of The Designer',
                   nextLabel: '2.3 Design Thinking ⭐ »',
+                  onPrev: () => onLessonTap('2.1 The Way Of The Designer ⭐'),
+                  onNext: () => onLessonTap('2.3 Design Thinking ⭐'),
                 ),
               ],
             ),

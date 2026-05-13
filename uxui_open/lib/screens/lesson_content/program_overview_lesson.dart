@@ -6,11 +6,13 @@ import '../../widgets/lesson_widgets.dart';
 class ProgramOverviewLesson extends StatelessWidget {
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const ProgramOverviewLesson({
     super.key,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
@@ -233,9 +235,11 @@ class ProgramOverviewLesson extends StatelessWidget {
                 const SizedBox(height: 16),
                 const Text('Join us, you wouldn\'t regret your decision 🤝', style: TextStyle(color: AppColors.greyLight, fontSize: 16)),
                 const SizedBox(height: 48),
-                const PrevNextBar(
+                PrevNextBar(
                   prevLabel: '« 1.3 Slack 🎯',
                   nextLabel: 'Next: 1.5 Your First UI »',
+                  onPrev: () => onLessonTap('1.3 Slack 🎯'),
+                  onNext: () => onLessonTap('1.5 Your First UI'),
                 ),
               ],
             ),

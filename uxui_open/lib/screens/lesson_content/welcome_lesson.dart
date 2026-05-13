@@ -6,11 +6,13 @@ import '../../widgets/lesson_widgets.dart';
 class WelcomeLesson extends StatelessWidget {
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const WelcomeLesson({
     super.key,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
@@ -50,9 +52,11 @@ class WelcomeLesson extends StatelessWidget {
                 const SizedBox(height: 20),
                 _paragraph("Now it's time to dive in!"),
                 const SizedBox(height: 48),
-                const PrevNextBar(
+                PrevNextBar(
                   prevLabel: '« 01 - Orientation',
                   nextLabel: '1.2 Code of Conduct »',
+                  onPrev: () => onLessonTap('01 - Orientation'),
+                  onNext: () => onLessonTap('1.2 Code of Conduct'),
                 ),
               ],
             ),

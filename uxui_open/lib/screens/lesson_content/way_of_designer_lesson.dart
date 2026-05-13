@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 import '../../theme/app_theme.dart';
 import '../../widgets/breadcrumb_bar.dart';
 import '../../widgets/lesson_widgets.dart';
@@ -6,13 +7,14 @@ import '../../widgets/lesson_widgets.dart';
 class WayOfDesignerLesson extends StatelessWidget {
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const WayOfDesignerLesson({
     super.key,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -33,316 +35,85 @@ class WayOfDesignerLesson extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ── On this page ─────────────────────────────────────────────
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: AppColors.cardBackground,
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: AppColors.cardBorder),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('On this page', style: TextStyle(color: AppColors.greyLight, fontSize: 15)),
-                      Icon(Icons.keyboard_arrow_down, color: AppColors.greyLight),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-
-                // ── Title ────────────────────────────────────────────────────
                 const Text(
                   '2.1 The way of the designer 😊',
-                  style: TextStyle(color: AppColors.white, fontSize: 36, fontWeight: FontWeight.w800, letterSpacing: -1.0),
+                  style: AppTextStyles.heading1,
                 ),
                 const SizedBox(height: 24),
-
-                // ── Success Criteria ──────────────────────────────────────────
-                SuccessCriteriaBox(
-                  coral: AppColors.coral,
-                  onDone: () {},
-                ),
-                const SizedBox(height: 32),
-
-                // ── Written Lessons row with donut chart ─────────────────────
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                              decoration: BoxDecoration(
-                                color: AppColors.coralDim,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: const Text('Written lessons', style: TextStyle(color: AppColors.coral, fontSize: 13, fontWeight: FontWeight.w600)),
-                            ),
-                          ]),
-                          const SizedBox(height: 16),
-                          const Text(
-                            'As a designer, you occupy a unique space in the world. Every object around you has been shaped by a designer\'s hand — from the mug you drank your morning coffee from, to the chair you\'re sitting on, to the app you used to set your morning alarm.',
-                            style: TextStyle(color: AppColors.greyLight, fontSize: 15, height: 1.7),
-                          ),
-                          const SizedBox(height: 12),
-                          const Text(
-                            'And as a UX/UI designer, you\'re specifically focused on the digital world. You create the apps, websites, and digital experiences that billions of people use every single day.',
-                            style: TextStyle(color: AppColors.greyLight, fontSize: 15, height: 1.7),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 32),
-                    // Donut chart
-                    SizedBox(
-                      width: 140,
-                      height: 140,
-                      child: CustomPaint(
-                        painter: DonutChartPainter(),
-                        child: const Center(
-                          child: Text('UX/UI\nOpen', textAlign: TextAlign.center,
-                            style: TextStyle(color: AppColors.white, fontSize: 12, fontWeight: FontWeight.w700)),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-
-                // ── UX Design Hierarchy Tree ──────────────────────────────────
-                const UXHierarchyTree(),
-                const SizedBox(height: 32),
-
-                // ── Body text + colorful blobs ────────────────────────────────
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Expanded(
-                      flex: 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'What does a UX/UI designer actually do?',
-                            style: TextStyle(color: AppColors.white, fontSize: 22, fontWeight: FontWeight.w700),
-                          ),
-                          SizedBox(height: 12),
-                          Text(
-                            'UX designers are problem solvers. They research, ideate, and test solutions. UI designers make those solutions look beautiful and feel intuitive. Most modern designers blend both disciplines.',
-                            style: TextStyle(color: AppColors.greyLight, fontSize: 15, height: 1.7),
-                          ),
-                          SizedBox(height: 12),
-                          Text(
-                            'The best products are born when empathy meets aesthetics — when designers truly understand the user AND craft something delightful for them to experience.',
-                            style: TextStyle(color: AppColors.greyLight, fontSize: 15, height: 1.7),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 24),
-                    // Colorful blob illustration
-                    SizedBox(
-                      width: 160,
-                      height: 160,
-                      child: CustomPaint(painter: BlobIllustrationPainter()),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-
-                // ── More body text ───────────────────────────────────────────
                 const Text(
-                  'About specialization in general',
-                  style: TextStyle(color: AppColors.white, fontSize: 22, fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(height: 12),
-                RichText(
-                  text: const TextSpan(
-                    style: TextStyle(color: AppColors.greyLight, fontSize: 15, height: 1.7),
-                    children: [
-                      TextSpan(text: 'While UX/UI is a broad and growing field, many designers eventually specialize. You might become a '),
-                      TextSpan(text: 'Product Designer', style: TextStyle(color: AppColors.coral, fontWeight: FontWeight.w600)),
-                      TextSpan(text: ', a '),
-                      TextSpan(text: 'Motion Designer', style: TextStyle(color: AppColors.coral, fontWeight: FontWeight.w600)),
-                      TextSpan(text: ', or an '),
-                      TextSpan(text: 'Interaction Designer', style: TextStyle(color: AppColors.coral, fontWeight: FontWeight.w600)),
-                      TextSpan(text: '. But early on, it\'s best to stay broad and soak it all in.'),
-                    ],
-                  ),
+                  "Becoming a successful designer is not just about mastering tools and techniques; it's about adopting a specific mindset and way of approaching problems. This is often referred to as 'design thinking'.",
+                  style: AppTextStyles.body,
                 ),
                 const SizedBox(height: 12),
                 const Text(
-                  'Your goal right now is to understand the landscape. What excites you? What problems do you want to solve? The answers will naturally guide your specialization over time.',
-                  style: TextStyle(color: AppColors.greyLight, fontSize: 15, height: 1.7),
-                ),
-                const SizedBox(height: 32),
-
-                // ── Figma screenshot banner ──────────────────────────────────
-                Container(
-                  width: double.infinity,
-                  height: 280,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFF1C1C2E), Color(0xFF2D1B4E)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                  ),
-                  child: Stack(
-                    children: [
-                      // Background colored shapes
-                      Positioned(top: 20, right: 40, child: Container(width: 80, height: 80,
-                        decoration: const BoxDecoration(color: Color(0xFFF24E1E), shape: BoxShape.circle))),
-                      Positioned(top: 60, right: 20, child: Container(width: 50, height: 50,
-                        decoration: const BoxDecoration(color: Color(0xFFA259FF), shape: BoxShape.circle))),
-                      Positioned(bottom: 30, right: 60, child: Container(width: 60, height: 60,
-                        decoration: const BoxDecoration(color: Color(0xFF0ACF83), shape: BoxShape.circle))),
-                      Positioned(top: 40, left: 40, child: Container(width: 40, height: 40,
-                        decoration: const BoxDecoration(color: Color(0xFF1ABCFE), shape: BoxShape.circle))),
-                      // Center text
-                      const Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Where teams', style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w900, letterSpacing: -0.5)),
-                            Text('design together', style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w900, letterSpacing: -0.5)),
-                            SizedBox(height: 12),
-                            Text('figma', style: TextStyle(color: Colors.white70, fontSize: 18, fontWeight: FontWeight.w500, letterSpacing: 2)),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 32),
-
-                // ── Figma Annual orange card ──────────────────────────────────
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(28),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF6A623),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text("Figma's Annual", style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.w600, letterSpacing: 0.5)),
-                            SizedBox(height: 4),
-                            Text('Config 2024', style: TextStyle(color: Colors.black, fontSize: 28, fontWeight: FontWeight.w900, letterSpacing: -0.5)),
-                            SizedBox(height: 8),
-                            Text('Watch the latest design talks, product announcements, and community sessions from Config.', style: TextStyle(color: Color(0xFF3D2800), fontSize: 14, height: 1.5)),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withAlpha(20),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(Icons.play_circle_filled, color: Colors.black, size: 48),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 32),
-
-                // ── Design Journal ────────────────────────────────────────────
-                const Text('Design Journal', style: TextStyle(color: AppColors.white, fontSize: 22, fontWeight: FontWeight.w700)),
-                const SizedBox(height: 12),
-                const Text(
-                  'One of the best habits you can build as a designer is keeping a design journal. In it, you\'ll collect things that inspire you — screenshots, sketches, color palettes, typography samples.',
-                  style: TextStyle(color: AppColors.greyLight, fontSize: 15, height: 1.7),
-                ),
-                const SizedBox(height: 20),
-
-                // Design journal card with image
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: AppColors.cardBackground,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.cardBorder),
-                  ),
-                  clipBehavior: Clip.hardEdge,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Image area - colorful gradient
-                      Container(
-                        height: 200,
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFFFFC0CB), Color(0xFFFFD700), Color(0xFF98FB98), Color(0xFF87CEEB)],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            // Decorative circles
-                            Positioned(top: 20, left: 30, child: Container(width: 60, height: 60, decoration: const BoxDecoration(color: Color(0xFFF24E1E), shape: BoxShape.circle))),
-                            Positioned(bottom: 20, right: 40, child: Container(width: 80, height: 80, decoration: const BoxDecoration(color: Color(0xFF0ACF83), shape: BoxShape.circle))),
-                            Positioned(top: 40, right: 80, child: Container(width: 45, height: 45, decoration: const BoxDecoration(color: Color(0xFFA259FF), shape: BoxShape.circle))),
-                            const Icon(Icons.menu_book, color: Colors.white, size: 48),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('Design Journal', style: TextStyle(color: AppColors.white, fontSize: 18, fontWeight: FontWeight.w700)),
-                            const SizedBox(height: 8),
-                            const Text('Document what inspires you. Save screenshots, write notes, and build your visual vocabulary every day.', style: TextStyle(color: AppColors.greyLight, fontSize: 14, height: 1.5)),
-                            const SizedBox(height: 16),
-                            Wrap(spacing: 8, runSpacing: 8, children: [
-                              _journalLink('ADPList', Icons.people),
-                              _journalLink('Dribbble', Icons.brush),
-                              _journalLink('Behance', Icons.grid_view),
-                              _journalLink('Awwwards', Icons.emoji_events),
-                            ]),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 32),
-
-                // ── Colorful character illustrations row ──────────────────────
-                Row(
-                  children: [
-                    IllustrationCard(color: const Color(0xFFFFF3E0), emoji: '🧑‍💻', label: 'Researcher'),
-                    const SizedBox(width: 12),
-                    IllustrationCard(color: const Color(0xFFE8F5E9), emoji: '🎨', label: 'Visual Designer'),
-                    const SizedBox(width: 12),
-                    IllustrationCard(color: const Color(0xFFE3F2FD), emoji: '📐', label: 'UX Designer'),
-                    const SizedBox(width: 12),
-                    IllustrationCard(color: const Color(0xFFF3E5F5), emoji: '🤝', label: 'Product Lead'),
-                  ],
+                  "As a UX/UI designer, you'll be solving complex problems for users while balancing the needs of the business. To do this effectively, you need to understand the core principles that guide the design process.",
+                  style: AppTextStyles.body,
                 ),
                 const SizedBox(height: 48),
 
-                // ── Prev / Next ───────────────────────────────────────────────
-                const PrevNextBar(
+                _HexagonDiagramSection(),
+                const SizedBox(height: 48),
+
+                _ImageTextRow(
+                  title: '1. The design process',
+                  text: 'A design process is a structured approach to problem-solving. It provides a framework for understanding users, challenging assumptions, and creating innovative solutions. While every designer and team might have their own variation, most follow a similar path.',
+                  painter: _DesignProcessPainter(),
+                ),
+                const SizedBox(height: 32),
+
+                _ImageTextRow(
+                  title: '2. Collaboration',
+                  text: "Design is a team sport. You'll work closely with product managers, developers, researchers, and other stakeholders. Effective communication and collaboration are essential for bringing ideas to life.",
+                  painter: _CollaborationPainter(),
+                  imageRight: true,
+                ),
+                const SizedBox(height: 32),
+
+                _ImageTextRow(
+                  title: '3. Feedback is Essential',
+                  text: "Feedback is the fuel for improvement. Learn to give and receive constructive criticism gracefully. It's not about defending your work; it's about making it better.",
+                  painter: _VennDiagramPainter(),
+                ),
+                const SizedBox(height: 48),
+
+                _RolesSection(),
+                const SizedBox(height: 48),
+
+                _ImageTextRow(
+                  title: '4. Empathy',
+                  text: "Empathy is the foundation of user-centric design. It's about putting yourself in the user's shoes, understanding their pain points, and designing solutions that address their real needs.",
+                  painter: _EmpathyMapPainter(),
+                  imageRight: true,
+                ),
+                const SizedBox(height: 32),
+
+                _ImageTextRow(
+                  title: '5. Iteration',
+                  text: "Design is never 'done'. It's a continuous cycle of testing, learning, and refining. Embrace iteration as a natural part of the process.",
+                  painter: _MagnifierChartPainter(),
+                ),
+                const SizedBox(height: 32),
+
+                _ImageTextRow(
+                  title: '6. Problem Solving',
+                  text: "At its core, design is about solving problems. You'll need to break down complex challenges into manageable pieces and find elegant solutions.",
+                  painter: _ProblemSolvingPainter(),
+                  imageRight: true,
+                ),
+                const SizedBox(height: 32),
+
+                _ImageTextRow(
+                  title: '7. Business Value',
+                  text: "Good design is good for business. You need to understand how your work impacts key business metrics and align your design decisions with the company's goals.",
+                  painter: _MindMapPainter(),
+                ),
+                const SizedBox(height: 48),
+
+                PrevNextBar(
                   prevLabel: '« 02 – UX Fundamentals',
                   nextLabel: '2.2 Your Career »',
+                  onPrev: () => onLessonTap('02 – UX Fundamentals'),
+                  onNext: () => onLessonTap('2.2 Your Career'),
                 ),
               ],
             ),
@@ -351,213 +122,477 @@ class WayOfDesignerLesson extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _journalLink(String label, IconData icon) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+// ─────────────────────────────────────────────────────────────────────────────
+// Components
+// ─────────────────────────────────────────────────────────────────────────────
+
+class _ImageTextRow extends StatelessWidget {
+  final String title;
+  final String text;
+  final CustomPainter painter;
+  final bool imageRight;
+
+  const _ImageTextRow({
+    required this.title,
+    required this.text,
+    required this.painter,
+    this.imageRight = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final imageWidget = Container(
+      width: 200,
+      height: 160,
       decoration: BoxDecoration(
-        color: AppColors.coralDim,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.coral.withAlpha(80)),
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.cardBorder),
       ),
-      child: Row(mainAxisSize: MainAxisSize.min, children: [
-        Icon(icon, color: AppColors.coral, size: 14),
-        const SizedBox(width: 6),
-        Text(label, style: const TextStyle(color: AppColors.coral, fontSize: 13, fontWeight: FontWeight.w600)),
-      ]),
+      child: CustomPaint(painter: painter),
+    );
+
+    final textWidget = Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: AppTextStyles.heading3),
+          const SizedBox(height: 12),
+          Text(text, style: AppTextStyles.body),
+        ],
+      ),
+    );
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: imageRight
+          ? [textWidget, const SizedBox(width: 32), imageWidget]
+          : [imageWidget, const SizedBox(width: 32), textWidget],
     );
   }
 }
 
-class SuccessCriteriaBox extends StatelessWidget {
-  final Color coral;
-  final VoidCallback onDone;
-
-  const SuccessCriteriaBox({super.key, required this.coral, required this.onDone});
-
+class _HexagonDiagramSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: coral.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: coral.withValues(alpha: 0.4)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('The Design Process', style: AppTextStyles.heading2),
+        const SizedBox(height: 16),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+          decoration: BoxDecoration(
+            color: AppColors.cardBackground,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: AppColors.cardBorder),
+          ),
+          child: Column(
             children: [
-              Icon(Icons.flag_rounded, color: coral, size: 20),
-              const SizedBox(width: 10),
-              Text(
-                'SUCCESS CRITERIA',
-                style: TextStyle(
-                  color: coral,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 1.0,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _HexNode('EMPATHIZE', AppColors.coral),
+                  _Arrow(),
+                  _HexNode('DEFINE', AppColors.yellow),
+                  _Arrow(),
+                  _HexNode('IDEATE', AppColors.green),
+                  _Arrow(),
+                  _HexNode('PROTOTYPE', const Color(0xFF3B82F6)), // Blue
+                  _Arrow(),
+                  _HexNode('TEST', const Color(0xFFA855F7)), // Purple
+                ],
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'Stages of design thinking can be carried out in a different order and repeated as needed.',
+                style: TextStyle(color: AppColors.greyLight, fontSize: 13, fontStyle: FontStyle.italic),
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          const Text(
-            'By the end of this checkpoint, you should be able to identify the core components of the "Way of the Designer" and explain how a design-first approach differs from a technical-first approach.',
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 16,
-              height: 1.6,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: onDone,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.white,
-              foregroundColor: Colors.black,
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            ),
-            child: const Text(
-              'Mark as done',
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
-            ),
-          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _HexNode extends StatelessWidget {
+  final String label;
+  final Color color;
+  const _HexNode(this.label, this.color);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 75,
+      height: 85,
+      child: CustomPaint(
+        painter: _HexShapePainter(color),
+        child: Center(
+          child: Text(label, style: const TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+        ),
+      ),
+    );
+  }
+}
+
+class _HexShapePainter extends CustomPainter {
+  final Color color;
+  _HexShapePainter(this.color);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final cx = size.width / 2;
+    final cy = size.height / 2;
+    final r = size.width / 2;
+
+    final path = Path();
+    for (int i = 0; i < 6; i++) {
+      final angle = 2 * math.pi / 6 * i - math.pi / 6;
+      final x = cx + r * math.cos(angle);
+      final y = cy + r * math.sin(angle);
+      if (i == 0) path.moveTo(x, y);
+      else path.lineTo(x, y);
+    }
+    path.close();
+
+    canvas.drawPath(path, Paint()..color = color);
+    canvas.drawPath(path, Paint()..color = Colors.white.withOpacity(0.15)..style = PaintingStyle.stroke..strokeWidth = 2);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
+}
+
+class _Arrow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Row(
+        children: [
+          Container(width: 12, height: 2, color: AppColors.greyLight.withOpacity(0.5)),
+          Icon(Icons.arrow_forward_ios, size: 10, color: AppColors.greyLight.withOpacity(0.5)),
         ],
       ),
     );
   }
 }
 
-class IllustrationCard extends StatelessWidget {
-  final Color color;
-  final String emoji;
-  final String label;
-  const IllustrationCard({super.key, required this.color, required this.emoji, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(12)),
-        child: Column(children: [
-          Text(emoji, style: const TextStyle(fontSize: 36)),
-          const SizedBox(height: 8),
-          Text(label, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black87, fontSize: 13, fontWeight: FontWeight.w600)),
-        ]),
-      ),
-    );
-  }
-}
-
-class UXHierarchyTree extends StatelessWidget {
-  const UXHierarchyTree({super.key});
-
+class _RolesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _treeNode('UX Design', AppColors.coral, Colors.white, isRoot: true),
-        const SizedBox(height: 8),
-        Container(width: 2, height: 20, color: AppColors.cardBorder),
-        const SizedBox(height: 4),
+        const Text('Roles and Responsibilities', style: AppTextStyles.heading2),
+        const SizedBox(height: 12),
+        const Text(
+          "As a designer, you'll collaborate with various roles. Here's a quick overview of who does what:",
+          style: AppTextStyles.body,
+        ),
+        const SizedBox(height: 24),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _branchNode('Product\nDesign', const Color(0xFF7B2D8B)),
-            _branchNode('Graphic\nDesign', const Color(0xFF1565C0)),
-            _branchNode('Interaction\nDesign', const Color(0xFF2E7D32)),
-            _branchNode('Motion\nDesign', const Color(0xFF4A148C)),
+            _RoleCard(
+              title: 'Product Manager',
+              desc: "Defines the 'what' and 'why'.",
+              icon: Icons.lightbulb_outline,
+              color: AppColors.coral,
+            ),
+            const SizedBox(width: 16),
+            _RoleCard(
+              title: 'UX Designer',
+              desc: "Focuses on the user journey and experience.",
+              icon: Icons.route,
+              color: AppColors.yellow,
+            ),
+            const SizedBox(width: 16),
+            _RoleCard(
+              title: 'UI Designer',
+              desc: "Creates the visual interface and interactive elements.",
+              icon: Icons.color_lens,
+              color: AppColors.green,
+            ),
+            const SizedBox(width: 16),
+            _RoleCard(
+              title: 'Developer',
+              desc: "Builds the product and brings the design to life.",
+              icon: Icons.code,
+              color: const Color(0xFF3B82F6),
+            ),
           ],
         ),
       ],
     );
   }
+}
 
-  Widget _treeNode(String label, Color bg, Color fg, {bool isRoot = false}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: Text(label, style: TextStyle(color: fg, fontSize: isRoot ? 16 : 14, fontWeight: FontWeight.w700)),
-    );
-  }
+class _RoleCard extends StatelessWidget {
+  final String title;
+  final String desc;
+  final IconData icon;
+  final Color color;
 
-  Widget _branchNode(String label, Color color) {
-    return Column(
-      children: [
-        Container(width: 2, height: 20, color: AppColors.cardBorder),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Text(label, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
+  const _RoleCard({required this.title, required this.desc, required this.icon, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        height: 180,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppColors.cardBackground,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: AppColors.cardBorder),
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.05),
+              blurRadius: 20,
+              offset: const Offset(0, 8),
+            ),
+          ],
         ),
-      ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(icon, color: color, size: 24),
+            ),
+            const Spacer(),
+            Text(title, style: const TextStyle(color: AppColors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+            const SizedBox(height: 8),
+            Text(desc, style: const TextStyle(color: AppColors.greyLight, fontSize: 12, height: 1.4)),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class DonutChartPainter extends CustomPainter {
+// ─────────────────────────────────────────────────────────────────────────────
+// Custom Painters
+// ─────────────────────────────────────────────────────────────────────────────
+
+class _DesignProcessPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    
+    canvas.drawRect(Rect.fromCenter(center: center - const Offset(20, 20), width: 40, height: 40), Paint()..color = AppColors.coral.withOpacity(0.8));
+    canvas.drawCircle(center + const Offset(30, -10), 25, Paint()..color = AppColors.yellow.withOpacity(0.8));
+    canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromCenter(center: center + const Offset(-10, 30), width: 50, height: 30), const Radius.circular(8)), Paint()..color = AppColors.green.withOpacity(0.8));
+
+    final cursorPath = Path()
+      ..moveTo(center.dx + 10, center.dy + 10)
+      ..lineTo(center.dx + 25, center.dy + 35)
+      ..lineTo(center.dx + 18, center.dy + 35)
+      ..lineTo(center.dx + 18, center.dy + 45)
+      ..lineTo(center.dx + 10, center.dy + 45)
+      ..lineTo(center.dx + 10, center.dy + 35)
+      ..lineTo(center.dx + 0, center.dy + 35)
+      ..close();
+    canvas.drawPath(cursorPath, Paint()..color = AppColors.white);
+    canvas.drawPath(cursorPath, Paint()..color = Colors.black.withOpacity(0.2)..style = PaintingStyle.stroke..strokeWidth = 2);
+  }
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
+}
+
+class _CollaborationPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final cx = size.width / 2;
     final cy = size.height / 2;
-    final outerR = size.width / 2;
-    final innerR = outerR * 0.6;
+    
+    final p1 = Offset(cx - 30, cy);
+    final p2 = Offset(cx + 30, cy);
 
-    final segments = [
-      (0.35, const Color(0xFFE85D75)),
-      (0.25, const Color(0xFF00C853)),
-      (0.20, const Color(0xFF2196F3)),
-      (0.20, const Color(0xFFFFC107)),
-    ];
+    canvas.drawLine(p1, p2, Paint()..color = AppColors.cardBorder..strokeWidth = 4);
 
-    double startAngle = -1.5708;
-    final paint = Paint()..style = PaintingStyle.stroke..strokeWidth = outerR - innerR;
+    canvas.drawCircle(p1, 24, Paint()..color = AppColors.green.withOpacity(0.2));
+    canvas.drawCircle(p1, 24, Paint()..color = AppColors.green..style = PaintingStyle.stroke..strokeWidth = 2);
+    
+    canvas.drawCircle(p2, 24, Paint()..color = AppColors.yellow.withOpacity(0.2));
+    canvas.drawCircle(p2, 24, Paint()..color = AppColors.yellow..style = PaintingStyle.stroke..strokeWidth = 2);
 
-    for (final seg in segments) {
-      paint.color = seg.$2;
-      canvas.drawArc(
-        Rect.fromCircle(center: Offset(cx, cy), radius: (outerR + innerR) / 2),
-        startAngle,
-        seg.$1 * 6.2832,
-        false,
-        paint,
-      );
-      startAngle += seg.$1 * 6.2832 + 0.04;
-    }
+    final tp1 = TextPainter(text: const TextSpan(text: '🤝', style: TextStyle(fontSize: 20)), textDirection: TextDirection.ltr)..layout();
+    tp1.paint(canvas, p1 - Offset(tp1.width/2, tp1.height/2));
+    
+    final tp2 = TextPainter(text: const TextSpan(text: '💬', style: TextStyle(fontSize: 20)), textDirection: TextDirection.ltr)..layout();
+    tp2.paint(canvas, p2 - Offset(tp2.width/2, tp2.height/2));
   }
-
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant CustomPainter old) => false;
 }
 
-class BlobIllustrationPainter extends CustomPainter {
+class _VennDiagramPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final blobs = [
-      (Offset(40, 40), 38.0, const Color(0xFFFFC0CB)),
-      (Offset(100, 30), 28.0, const Color(0xFF87CEEB)),
-      (Offset(120, 90), 36.0, const Color(0xFF98FB98)),
-      (Offset(50, 110), 32.0, const Color(0xFFFFD700)),
-      (Offset(80, 70), 24.0, const Color(0xFFDDA0DD)),
-    ];
-    for (final b in blobs) {
-      canvas.drawCircle(b.$1, b.$2, Paint()..color = b.$3);
+    final cx = size.width / 2;
+    final cy = size.height / 2;
+    const r = 40.0;
+    const dy = 18.0;
+    const dx = 22.0;
+
+    final topC = Offset(cx, cy - dy - 5);
+    final botL = Offset(cx - dx, cy + dy + 5);
+    final botR = Offset(cx + dx, cy + dy + 5);
+
+    void drawCircle(Offset c, Color color) {
+      canvas.drawCircle(c, r, Paint()..color = color.withOpacity(0.2)..style = PaintingStyle.fill);
+      canvas.drawCircle(c, r, Paint()..color = color.withOpacity(0.8)..style = PaintingStyle.stroke..strokeWidth = 2);
+    }
+
+    drawCircle(topC, const Color(0xFF3B82F6));
+    drawCircle(botL, AppColors.coral);
+    drawCircle(botR, AppColors.green);
+
+    void drawLabel(String t, Offset pos, Color c) {
+      final tp = TextPainter(
+        text: TextSpan(text: t, style: TextStyle(fontSize: 9, color: c, fontWeight: FontWeight.w700)),
+        textDirection: TextDirection.ltr,
+      )..layout();
+      tp.paint(canvas, pos - Offset(tp.width / 2, tp.height / 2));
+    }
+
+    drawLabel('Desirability', topC - const Offset(0, r + 8), const Color(0xFF3B82F6));
+    drawLabel('Viability', botL - const Offset(r * 0.8, -r * 0.8), AppColors.coral);
+    drawLabel('Feasibility', botR + const Offset(r * 0.8, r * 0.8), AppColors.green);
+  }
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
+}
+
+class _EmpathyMapPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final cx = size.width / 2;
+    final cy = size.height / 2;
+
+    final paint = Paint()
+      ..color = AppColors.cardBorder
+      ..strokeWidth = 2;
+    
+    canvas.drawLine(Offset(cx, 20), Offset(cx, size.height - 20), paint);
+    canvas.drawLine(Offset(20, cy), Offset(size.width - 20, cy), paint);
+
+    canvas.drawCircle(Offset(cx, cy), 18, Paint()..color = AppColors.cardBackground);
+    canvas.drawCircle(Offset(cx, cy), 18, paint);
+    final iconPaint = TextPainter(
+      text: const TextSpan(text: '👤', style: TextStyle(fontSize: 16)),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    iconPaint.paint(canvas, Offset(cx - iconPaint.width/2, cy - iconPaint.height/2));
+
+    void drawText(String t, Offset pos, Color c) {
+      final tp = TextPainter(
+        text: TextSpan(text: t, style: TextStyle(fontSize: 11, color: c, fontWeight: FontWeight.w800, letterSpacing: 1)),
+        textDirection: TextDirection.ltr,
+      )..layout();
+      tp.paint(canvas, pos - Offset(tp.width / 2, tp.height / 2));
+    }
+
+    drawText('SAYS', Offset(cx / 2 + 10, cy / 2 + 10), AppColors.coral);
+    drawText('THINKS', Offset(cx + cx / 2 - 10, cy / 2 + 10), AppColors.yellow);
+    drawText('DOES', Offset(cx / 2 + 10, cy + cy / 2 - 10), AppColors.green);
+    drawText('FEELS', Offset(cx + cx / 2 - 10, cy + cy / 2 - 10), const Color(0xFF3B82F6));
+  }
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
+}
+
+class _MagnifierChartPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final cx = size.width / 2;
+    final cy = size.height / 2;
+    
+    final barPaint = Paint()..color = AppColors.coral.withOpacity(0.5);
+    final bars = [0.4, 0.7, 0.5, 0.9, 0.6, 0.8, 0.5];
+    const barW = 10.0;
+    final startX = cx - (bars.length * (barW + 8)) / 2;
+    for (int i = 0; i < bars.length; i++) {
+      final bh = bars[i] * 60;
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(startX + i * (barW + 8), size.height - 30 - bh, barW, bh),
+          const Radius.circular(4),
+        ),
+        barPaint,
+      );
+    }
+
+    final magCenter = Offset(cx + 15, cy - 10);
+    const magR = 30.0;
+    canvas.drawCircle(magCenter, magR, Paint()..color = const Color(0xFF3B82F6).withOpacity(0.15));
+    canvas.drawCircle(magCenter, magR, Paint()..color = const Color(0xFF3B82F6)..style = PaintingStyle.stroke..strokeWidth = 3);
+    canvas.drawLine(magCenter + const Offset(magR * 0.7, magR * 0.7), magCenter + const Offset(magR * 1.5, magR * 1.5), Paint()..color = const Color(0xFF3B82F6)..strokeWidth = 5..strokeCap = StrokeCap.round);
+  }
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
+}
+
+class _ProblemSolvingPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final cx = size.width / 2;
+    final cy = size.height / 2;
+
+    final paint = Paint()..color = AppColors.yellow.withOpacity(0.8);
+    
+    canvas.drawCircle(Offset(cx, cy - 15), 20, paint);
+    canvas.drawRect(Rect.fromCenter(center: Offset(cx, cy + 10), width: 16, height: 12), Paint()..color = AppColors.grey);
+    
+    final rayPaint = Paint()..color = AppColors.yellow.withOpacity(0.5)..strokeWidth = 3..strokeCap = StrokeCap.round;
+    for (int i = 0; i < 5; i++) {
+      final angle = -3.14 + (3.14 / 4) * i;
+      final start = Offset(cx + 25 * math.cos(angle), cy - 15 + 25 * math.sin(angle));
+      final end = Offset(cx + 35 * math.cos(angle), cy - 15 + 35 * math.sin(angle));
+      canvas.drawLine(start, end, rayPaint);
     }
   }
-
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant CustomPainter old) => false;
 }
+
+class _MindMapPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final cx = size.width / 2;
+    final cy = size.height / 2;
+
+    final center = Offset(cx, cy);
+    final nodes = [
+      Offset(cx - 35, cy - 25),
+      Offset(cx + 35, cy - 25),
+      Offset(cx - 25, cy + 35),
+      Offset(cx + 35, cy + 25),
+    ];
+
+    final linePaint = Paint()..color = AppColors.cardBorder..strokeWidth = 2;
+    for (var node in nodes) {
+      canvas.drawLine(center, node, linePaint);
+      canvas.drawCircle(node, 10, Paint()..color = AppColors.cardBorder);
+    }
+
+    canvas.drawCircle(center, 22, Paint()..color = AppColors.green);
+    final tp = TextPainter(
+      text: const TextSpan(text: 'P-M-F', style: TextStyle(fontSize: 10, color: AppColors.cardBackground, fontWeight: FontWeight.bold)),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    tp.paint(canvas, center - Offset(tp.width/2, tp.height/2));
+  }
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => false;
+}
+

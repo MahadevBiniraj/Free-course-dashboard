@@ -6,11 +6,13 @@ import '../../widgets/lesson_widgets.dart';
 class VisualsLesson extends StatelessWidget {
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const VisualsLesson({
     super.key,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
@@ -49,9 +51,11 @@ class VisualsLesson extends StatelessWidget {
                 buildBulletPoint('Hierarchy: Arranging elements in order of importance.'),
                 buildBulletPoint('Whitespace: The negative space that gives elements room to breathe.'),
                 const SizedBox(height: 48),
-                const PrevNextBar(
+                PrevNextBar(
                   prevLabel: '« 2.4 Understanding Users',
                   nextLabel: '2.6 Designing For Everyone »',
+                  onPrev: () => onLessonTap('2.4 Understanding Users'),
+                  onNext: () => onLessonTap('2.6 Designing For Everyone'),
                 ),
               ],
             ),

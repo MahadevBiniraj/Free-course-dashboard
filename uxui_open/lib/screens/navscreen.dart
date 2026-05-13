@@ -90,6 +90,7 @@ class _CourseNavPageState extends State<CourseNavPage> {
               sidebarCollapsed: _sidebarCollapsed,
               selectedLesson: _selectedLesson,
               onExpandSidebar: () => setState(() => _sidebarCollapsed = false),
+              onLessonTap: (l) => setState(() => _selectedLesson = l),
             ),
           ),
         ],
@@ -102,11 +103,13 @@ class _MainContentRouter extends StatelessWidget {
   final bool sidebarCollapsed;
   final String selectedLesson;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const _MainContentRouter({
     required this.sidebarCollapsed,
     required this.selectedLesson,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
@@ -116,72 +119,86 @@ class _MainContentRouter extends StatelessWidget {
         return WelcomeLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '1.2 Code of Conduct':
         return CodeOfConductLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '01 - Orientation':
         return OrientationLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '1.4 Program Overview ⭐':
         return ProgramOverviewLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '02 – UX Fundamentals':
         return UXFundamentalsOverviewLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '2.1 The Way Of The Designer ⭐':
         return WayOfDesignerLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '2.2 Your Career':
         return YourCareerLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '2.3 Design Thinking ⭐':
         return DesignThinkingLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '2.4 Understanding Users':
         return UnderstandingUsersLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '2.5 The Visuals':
         return VisualsLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '2.6 Designing For Everyone':
         return DesigningForEveryoneLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '2.7 Design Process 🎉📞':
         return DesignProcessLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       case '2.8 Design Foundations':
         return DesignFoundationsLesson(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
       default:
         return PlaceholderLesson(
           title: selectedLesson,
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
         );
     }
   }

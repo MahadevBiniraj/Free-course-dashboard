@@ -6,11 +6,13 @@ import '../../widgets/lesson_widgets.dart';
 class CodeOfConductLesson extends StatelessWidget {
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const CodeOfConductLesson({
     super.key,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
@@ -200,9 +202,11 @@ class CodeOfConductLesson extends StatelessWidget {
                   TextSpan(text: '.'),
                 ]),
                 const SizedBox(height: 48),
-                const PrevNextBar(
+                PrevNextBar(
                   prevLabel: '« 1.1 Welcome',
                   nextLabel: '1.3 Slack 🎯 »',
+                  onPrev: () => onLessonTap('1.1 Welcome'),
+                  onNext: () => onLessonTap('1.3 Slack 🎯'),
                 ),
               ],
             ),

@@ -6,11 +6,13 @@ import '../../widgets/lesson_widgets.dart';
 class DesignProcessLesson extends StatelessWidget {
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const DesignProcessLesson({
     super.key,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
@@ -49,9 +51,11 @@ class DesignProcessLesson extends StatelessWidget {
                   style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.7),
                 ),
                 const SizedBox(height: 48),
-                const PrevNextBar(
+                PrevNextBar(
                   prevLabel: '« 2.6 Designing For Everyone',
                   nextLabel: '2.8 Design Foundations »',
+                  onPrev: () => onLessonTap('2.6 Designing For Everyone'),
+                  onNext: () => onLessonTap('2.8 Design Foundations'),
                 ),
               ],
             ),

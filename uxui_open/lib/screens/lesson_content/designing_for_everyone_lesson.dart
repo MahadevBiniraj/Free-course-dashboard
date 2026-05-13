@@ -6,11 +6,13 @@ import '../../widgets/lesson_widgets.dart';
 class DesigningForEveryoneLesson extends StatelessWidget {
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const DesigningForEveryoneLesson({
     super.key,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
@@ -49,9 +51,11 @@ class DesigningForEveryoneLesson extends StatelessWidget {
                 buildBulletPoint('Understandable: Information and the operation of the UI must be understandable.'),
                 buildBulletPoint('Robust: Content must be robust enough that it can be interpreted reliably by a wide variety of user agents.'),
                 const SizedBox(height: 48),
-                const PrevNextBar(
+                PrevNextBar(
                   prevLabel: '« 2.5 The Visuals',
                   nextLabel: '2.7 Design Process »',
+                  onPrev: () => onLessonTap('2.5 The Visuals'),
+                  onNext: () => onLessonTap('2.7 Design Process 🎉📞'),
                 ),
               ],
             ),

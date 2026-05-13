@@ -31,11 +31,15 @@ class NavButton extends StatelessWidget {
 class PrevNextBar extends StatelessWidget {
   final String prevLabel;
   final String nextLabel;
+  final VoidCallback? onPrev;
+  final VoidCallback? onNext;
 
   const PrevNextBar({
     super.key,
     required this.prevLabel,
     required this.nextLabel,
+    this.onPrev,
+    this.onNext,
   });
 
   @override
@@ -43,11 +47,19 @@ class PrevNextBar extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: NavButton(label: prevLabel, align: TextAlign.left),
+          child: InkWell(
+            onTap: onPrev,
+            borderRadius: BorderRadius.circular(8),
+            child: NavButton(label: prevLabel, align: TextAlign.left),
+          ),
         ),
         const SizedBox(width: 16),
         Expanded(
-          child: NavButton(label: nextLabel, align: TextAlign.right),
+          child: InkWell(
+            onTap: onNext,
+            borderRadius: BorderRadius.circular(8),
+            child: NavButton(label: nextLabel, align: TextAlign.right),
+          ),
         ),
       ],
     );
@@ -56,7 +68,8 @@ class PrevNextBar extends StatelessWidget {
 
 class CardGrid extends StatelessWidget {
   final List<Map<String, String>> cards;
-  const CardGrid({super.key, required this.cards});
+  final ValueChanged<String>? onCardTap;
+  const CardGrid({super.key, required this.cards, this.onCardTap});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +90,10 @@ class CardGrid extends StatelessWidget {
                 return Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(left: c == 1 ? 16 : 0),
-                    child: LessonCard(data: cards[idx]),
+                    child: LessonCard(
+                      data: cards[idx],
+                      onTap: onCardTap != null ? () => onCardTap!(cards[idx]['title']!) : null,
+                    ),
                   ),
                 );
               }),
@@ -91,17 +107,21 @@ class CardGrid extends StatelessWidget {
 
 class LessonCard extends StatelessWidget {
   final Map<String, String> data;
-  const LessonCard({super.key, required this.data});
+  final VoidCallback? onTap;
+  const LessonCard({super.key, required this.data, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: AppColors.cardBackground,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.cardBorder),
-      ),
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppColors.cardBackground,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: AppColors.cardBorder),
+        ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -135,7 +155,8 @@ class LessonCard extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ),
+   );
   }
 }
 

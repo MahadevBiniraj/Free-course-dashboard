@@ -7,11 +7,13 @@ import '../../widgets/lesson_widgets.dart';
 class OrientationLesson extends StatelessWidget {
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const OrientationLesson({
     super.key,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
@@ -56,11 +58,16 @@ class OrientationLesson extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 32),
-                const CardGrid(cards: kCards),
+                CardGrid(
+                  cards: kCards,
+                  onCardTap: onLessonTap,
+                ),
                 const SizedBox(height: 36),
-                const PrevNextBar(
+                PrevNextBar(
                   prevLabel: '« UX/UI Course Intro',
                   nextLabel: '1.1 Welcome »',
+                  onPrev: () {}, // No intro yet
+                  onNext: () => onLessonTap('1.1 Welcome'),
                 ),
               ],
             ),

@@ -7,11 +7,13 @@ import '../../widgets/lesson_widgets.dart';
 class UXFundamentalsOverviewLesson extends StatelessWidget {
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const UXFundamentalsOverviewLesson({
     super.key,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
@@ -67,19 +69,21 @@ class UXFundamentalsOverviewLesson extends StatelessWidget {
                 
                 ...kSections[1].lessons.asMap().entries.map((entry) {
                   final title = entry.value;
-                  final isActive = title == '2.1 The Way Of The Designer ⭐';
+                  final isActive = false; // Overview itself is not a lesson
                   
                   return LessonTile(
                     title: title,
                     isActive: isActive,
-                    onTap: () {},
+                    onTap: () => onLessonTap(title),
                   );
                 }).toList(),
 
                 const SizedBox(height: 36),
-                const PrevNextBar(
+                PrevNextBar(
                   prevLabel: '« 01 - Orientation',
                   nextLabel: '2.1 The Way Of The Designer ⭐ »',
+                  onPrev: () => onLessonTap('01 - Orientation'),
+                  onNext: () => onLessonTap('2.1 The Way Of The Designer ⭐'),
                 ),
               ],
             ),

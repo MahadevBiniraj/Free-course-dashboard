@@ -6,12 +6,14 @@ class PlaceholderLesson extends StatelessWidget {
   final String title;
   final bool sidebarCollapsed;
   final VoidCallback onExpandSidebar;
+  final ValueChanged<String> onLessonTap;
 
   const PlaceholderLesson({
     super.key,
     required this.title,
     required this.sidebarCollapsed,
     required this.onExpandSidebar,
+    required this.onLessonTap,
   });
 
   @override
