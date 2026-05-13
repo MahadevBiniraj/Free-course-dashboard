@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import '../models/course_data.dart';
 import '../theme/app_theme.dart';
 import '../widgets/nav_sidebar.dart';
-import 'lesson_content/welcome_lesson.dart';
-import 'lesson_content/code_of_conduct_lesson.dart';
-import 'lesson_content/orientation_lesson.dart';
-import 'lesson_content/program_overview_lesson.dart';
-import 'lesson_content/ux_fundamentals_overview_lesson.dart';
-import 'lesson_content/way_of_designer_lesson.dart';
-import 'lesson_content/your_career_lesson.dart';
-import 'lesson_content/design_thinking_lesson.dart';
-import 'lesson_content/understanding_users_lesson.dart';
-import 'lesson_content/visuals_lesson.dart';
-import 'lesson_content/designing_for_everyone_lesson.dart';
-import 'lesson_content/design_process_lesson.dart';
-import 'lesson_content/design_foundations_lesson.dart';
-import 'lesson_content/placeholder_lesson.dart';
+
+// Lesson Imports
+import 'package:uxui_open/screens/lesson_content/welcome_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/code_of_conduct_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/orientation_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/program_overview_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/ux_fundamentals_overview_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/way_of_designer_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/your_career_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/design_thinking_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/understanding_users_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/visuals_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/designing_for_everyone_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/design_process_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/design_foundations_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/placeholder_lesson.dart';
 
 void main() {
   runApp(const UXUIApp());
@@ -42,7 +44,8 @@ class UXUIApp extends StatelessWidget {
 }
 
 class CourseNavPage extends StatefulWidget {
-  const CourseNavPage({super.key});
+  final String? initialLesson;
+  const CourseNavPage({super.key, this.initialLesson});
 
   @override
   State<CourseNavPage> createState() => _CourseNavPageState();
@@ -50,8 +53,22 @@ class CourseNavPage extends StatefulWidget {
 
 class _CourseNavPageState extends State<CourseNavPage> {
   int _expandedIndex = 0;
-  String _selectedLesson = '1.1 Welcome';
+  late String _selectedLesson;
   bool _sidebarCollapsed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedLesson = widget.initialLesson ?? '1.1 Welcome';
+
+    // Auto-expand the section containing the initial lesson
+    for (int i = 0; i < kSections.length; i++) {
+      if (kSections[i].lessons.contains(_selectedLesson)) {
+        _expandedIndex = i;
+        break;
+      }
+    }
+  }
 
   static const double kSidebarWidth = 320;
   static const double kCollapsedWidth = 0;
@@ -62,7 +79,7 @@ class _CourseNavPageState extends State<CourseNavPage> {
       backgroundColor: AppColors.background,
       body: Row(
         children: [
-          // ── Sidebar ──────────────────────────────────────────────────────
+          // ── Sidebar ──────────────────────────────────────────────────────────
           AnimatedContainer(
             duration: const Duration(milliseconds: 250),
             curve: Curves.easeInOut,
@@ -84,13 +101,32 @@ class _CourseNavPageState extends State<CourseNavPage> {
             ),
           ),
 
-          // ── Main content ─────────────────────────────────────────────────
+          // ── Main content ──────────────────────────────────────────────────────
           Expanded(
-            child: _MainContentRouter(
-              sidebarCollapsed: _sidebarCollapsed,
-              selectedLesson: _selectedLesson,
-              onExpandSidebar: () => setState(() => _sidebarCollapsed = false),
-              onLessonTap: (l) => setState(() => _selectedLesson = l),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 400),
+              switchInCurve: Curves.easeOutCubic,
+              switchOutCurve: Curves.easeInCubic,
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: SlideTransition(
+                    position: Tween<Offset>(
+                      begin: const Offset(0.01, 0),
+                      end: Offset.zero,
+                    ).animate(animation),
+                    child: child,
+                  ),
+                );
+              },
+              child: _MainContentRouter(
+                key: ValueKey(_selectedLesson),
+                sidebarCollapsed: _sidebarCollapsed,
+                selectedLesson: _selectedLesson,
+                onExpandSidebar: () =>
+                    setState(() => _sidebarCollapsed = false),
+                onLessonTap: (l) => setState(() => _selectedLesson = l),
+              ),
             ),
           ),
         ],
@@ -106,6 +142,7 @@ class _MainContentRouter extends StatelessWidget {
   final ValueChanged<String> onLessonTap;
 
   const _MainContentRouter({
+    super.key,
     required this.sidebarCollapsed,
     required this.selectedLesson,
     required this.onExpandSidebar,
@@ -114,7 +151,10 @@ class _MainContentRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    switch (selectedLesson) {
+    // Normalize lesson title for matching
+    final String lesson = selectedLesson;
+
+    switch (lesson) {
       case '1.1 Welcome':
         return WelcomeLesson(
           sidebarCollapsed: sidebarCollapsed,
@@ -164,7 +204,7 @@ class _MainContentRouter extends StatelessWidget {
           onLessonTap: onLessonTap,
         );
       case '2.4 Understanding Users':
-        return UnderstandingUsersLesson(
+        return UnderstandingUsersScreen(
           sidebarCollapsed: sidebarCollapsed,
           onExpandSidebar: onExpandSidebar,
           onLessonTap: onLessonTap,

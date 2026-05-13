@@ -31,7 +31,10 @@ class BreadcrumbBar extends StatelessWidget {
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
             ),
-          const Icon(Icons.home_outlined, color: AppColors.grey, size: 17),
+          InkWell(
+            onTap: () => Navigator.pop(context),
+            child: const Icon(Icons.home_outlined, color: AppColors.grey, size: 17),
+          ),
           ...items.expand((item) => [
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 6),

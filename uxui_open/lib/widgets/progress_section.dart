@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import '../screens/navscreen.dart';
 
 class ProgressSection extends StatelessWidget {
   const ProgressSection({super.key});
@@ -125,13 +126,22 @@ class ProgressSection extends StatelessWidget {
                       const Text('Next Up',
                           style: TextStyle(color: AppColors.green, fontSize: 13, fontWeight: FontWeight.w600)),
                       const SizedBox(height: 8),
-                      const Text('Module 5', style: TextStyle(color: AppColors.grey, fontSize: 13)),
+                      const Text('Module 2', style: TextStyle(color: AppColors.grey, fontSize: 13)),
                       const SizedBox(height: 4),
-                      const Text('State Management\nwith Provider',
+                      const Text('2.4 Understanding\nUsers',
                           style: TextStyle(color: AppColors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 16),
                       ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CourseNavPage(
+                                initialLesson: '2.4 Understanding Users',
+                              ),
+                            ),
+                          );
+                        },
                         icon: const Icon(Icons.play_arrow, size: 16),
                         label: const Text('Continue', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                         style: ElevatedButton.styleFrom(

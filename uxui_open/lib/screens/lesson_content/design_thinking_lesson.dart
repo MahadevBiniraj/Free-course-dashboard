@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import '../../theme/app_theme.dart';
+import '../../widgets/breadcrumb_bar.dart';
+import '../../widgets/lesson_widgets.dart';
 
 // ── Palette ────────────────────────────────────────────────────────────────
 const Color kBg = Color(0xFF0F0F11);
@@ -46,8 +49,16 @@ class DesignThinkingLesson extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            BreadcrumbBar(
+              sidebarCollapsed: sidebarCollapsed,
+              onExpandSidebar: onExpandSidebar,
+              items: const [
+                BreadcrumbItem(label: '02 – UX Fundamentals'),
+                BreadcrumbItem(label: '2.3 Design Thinking', isLast: true),
+              ],
+            ),
             _PageHeader(),
-            const SizedBox(height: 6),
+            const SizedBox(height: 16),
             _LearningObjective(),
             const SizedBox(height: 16),
             _NoteBox(),
@@ -75,6 +86,13 @@ class DesignThinkingLesson extends StatelessWidget {
             _SummarySection(),
             const SizedBox(height: 32),
             _AssignmentSection(),
+            const SizedBox(height: 48),
+            PrevNextBar(
+              prevLabel: '« 2.2 Your Career',
+              nextLabel: '2.4 Understanding Users »',
+              onPrev: () => onLessonTap('2.2 Your Career'),
+              onNext: () => onLessonTap('2.4 Understanding Users'),
+            ),
           ],
         ),
       ),
@@ -99,7 +117,7 @@ class _PageHeader extends StatelessWidget {
                   height: 1.2)),
         ),
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () => Navigator.pop(context),
           style: ElevatedButton.styleFrom(
             backgroundColor: kOlive,
             foregroundColor: kWhite,
