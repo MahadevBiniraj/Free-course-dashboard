@@ -44,13 +44,13 @@ class BreadcrumbBar extends StatelessWidget {
                     ? Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF2A1F2D),
+                          color: AppColors.greenDim,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           item.label,
                           style: const TextStyle(
-                            color: Color(0xFFE85D75),
+                            color: AppColors.green,
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                           ),

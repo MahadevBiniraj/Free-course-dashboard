@@ -17,7 +17,6 @@ class CodeOfConductLesson extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -36,7 +35,8 @@ class CodeOfConductLesson extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
                     color: AppColors.cardBackground,
                     borderRadius: BorderRadius.circular(6),
@@ -47,9 +47,11 @@ class CodeOfConductLesson extends StatelessWidget {
                     children: [
                       Text(
                         'On this page',
-                        style: TextStyle(color: AppColors.greyLight, fontSize: 15),
+                        style:
+                            TextStyle(color: AppColors.greyLight, fontSize: 15),
                       ),
-                      Icon(Icons.keyboard_arrow_down, color: AppColors.greyLight),
+                      Icon(Icons.keyboard_arrow_down,
+                          color: AppColors.greyLight),
                     ],
                   ),
                 ),
@@ -75,7 +77,8 @@ class CodeOfConductLesson extends StatelessWidget {
                     children: [
                       const Row(
                         children: [
-                          Icon(Icons.info_outline, color: AppColors.white, size: 20),
+                          Icon(Icons.info_outline,
+                              color: AppColors.white, size: 20),
                           SizedBox(width: 8),
                           Text(
                             'NOTE',
@@ -103,57 +106,106 @@ class CodeOfConductLesson extends StatelessWidget {
                 const SizedBox(height: 24),
                 RichText(
                   text: const TextSpan(
-                    style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                    style: TextStyle(
+                        color: AppColors.greyLight, fontSize: 16, height: 1.6),
                     children: [
-                      TextSpan(text: 'It is mandatory to fully respect the requirements of '),
-                      TextSpan(text: 'UX/UI Open', style: TextStyle(color: AppColors.coral)),
-                      TextSpan(text: ' Code of Conduct to assure the best possible experience for all students.'),
+                      TextSpan(
+                          text:
+                              'It is mandatory to fully respect the requirements of '),
+                      TextSpan(
+                          text: 'UX/UI Open',
+                          style: TextStyle(color: AppColors.green)),
+                      TextSpan(
+                          text:
+                              ' Code of Conduct to assure the best possible experience for all students.'),
                     ],
                   ),
                 ),
                 const SizedBox(height: 32),
                 const Text(
                   'Respect people and guidelines:',
-                  style: TextStyle(color: AppColors.white, fontSize: 22, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 16),
                 buildBulletPointRich(const [
-                  TextSpan(text: 'Abusive behavior towards other students and/or '),
-                  TextSpan(text: 'UX/UI Open', style: TextStyle(color: AppColors.coral)),
-                  TextSpan(text: ' employees. (Either anywhere online or on our Slack community platform)'),
+                  TextSpan(
+                      text: 'Abusive behavior towards other students and/or '),
+                  TextSpan(
+                      text: 'UX/UI Open',
+                      style: TextStyle(color: AppColors.green)),
+                  TextSpan(
+                      text:
+                          ' employees. (Either anywhere online or on our Slack community platform)'),
                 ]),
                 buildBulletPoint('Avoid breaking national and/or local laws.'),
-                buildBulletPoint("Don't express sexism, racism, homophobia, ageism, ableism, or any other behavior deemed inappropriate for a healthy learning environment."),
-                buildBulletPoint('Be receptive to feedback and constructive criticism.'),
-                buildBulletPoint('Ask for help in our Slack workspace when you need it'),
+                buildBulletPoint(
+                    "Don't express sexism, racism, homophobia, ageism, ableism, or any other behavior deemed inappropriate for a healthy learning environment."),
+                buildBulletPoint(
+                    'Be receptive to feedback and constructive criticism.'),
+                buildBulletPoint(
+                    'Ask for help in our Slack workspace when you need it'),
                 const SizedBox(height: 32),
                 const Text(
                   'Open Bootcamp Content',
-                  style: TextStyle(color: AppColors.white, fontSize: 22, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 16),
                 buildBulletPointRich(const [
-                  TextSpan(text: 'Students are not allowed to photograph, record, copy nor share content without permission from '),
-                  TextSpan(text: 'UX/UI Open', style: TextStyle(color: AppColors.coral)),
+                  TextSpan(
+                      text:
+                          'Students are not allowed to photograph, record, copy nor share content without permission from '),
+                  TextSpan(
+                      text: 'UX/UI Open',
+                      style: TextStyle(color: AppColors.green)),
                   TextSpan(text: '.'),
                 ]),
                 buildBulletPointRich(const [
                   TextSpan(text: 'The course material is licensed under '),
-                  TextSpan(text: 'Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License', style: TextStyle(color: AppColors.coral)),
-                  TextSpan(text: ', which means that you are free to copy and redistribute the material in any medium or format as long as the names of the original authors '),
-                  TextSpan(text: 'UX/UI Open', style: TextStyle(color: AppColors.coral)),
+                  TextSpan(
+                      text:
+                          'Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License',
+                      style: TextStyle(color: AppColors.green)),
+                  TextSpan(
+                      text:
+                          ', which means that you are free to copy and redistribute the material in any medium or format as long as the names of the original authors '),
+                  TextSpan(
+                      text: 'UX/UI Open',
+                      style: TextStyle(color: AppColors.green)),
                   TextSpan(text: ' and '),
-                  TextSpan(text: 'Open Bootcamp', style: TextStyle(color: AppColors.coral)),
-                  TextSpan(text: ' along with a link to the sites are not removed. If you remix, transform, or build upon the material, you may '),
-                  TextSpan(text: 'not distribute', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.white)),
+                  TextSpan(
+                      text: 'Open Bootcamp',
+                      style: TextStyle(color: AppColors.green)),
+                  TextSpan(
+                      text:
+                          ' along with a link to the sites are not removed. If you remix, transform, or build upon the material, you may '),
+                  TextSpan(
+                      text: 'not distribute',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: AppColors.white)),
                   TextSpan(text: ' the modified material. '),
-                  TextSpan(text: 'Using the material for commercial purposes is forbidden without permission.', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.white)),
+                  TextSpan(
+                      text:
+                          'Using the material for commercial purposes is forbidden without permission.',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: AppColors.white)),
                   TextSpan(text: ' '),
-                  TextSpan(text: 'UX/UI Open', style: TextStyle(color: AppColors.coral)),
+                  TextSpan(
+                      text: 'UX/UI Open',
+                      style: TextStyle(color: AppColors.green)),
                   TextSpan(text: ' is powered and managed solely by '),
-                  TextSpan(text: 'The Open Bootcamp', style: TextStyle(color: AppColors.coral)),
+                  TextSpan(
+                      text: 'The Open Bootcamp',
+                      style: TextStyle(color: AppColors.green)),
                   TextSpan(text: '. Please reach out to '),
-                  TextSpan(text: 'uxui@theopenbootcamp.com', style: TextStyle(color: AppColors.coral)),
+                  TextSpan(
+                      text: 'uxui@theopenbootcamp.com',
+                      style: TextStyle(color: AppColors.green)),
                   TextSpan(text: ' for queries'),
                 ]),
                 const SizedBox(height: 24),
@@ -168,10 +220,14 @@ class CodeOfConductLesson extends StatelessWidget {
                 const SizedBox(height: 12),
                 RichText(
                   text: TextSpan(
-                    style: TextStyle(color: AppColors.greyLight, fontSize: 16, height: 1.6),
+                    style: TextStyle(
+                        color: AppColors.greyLight, fontSize: 16, height: 1.6),
                     children: [
                       TextSpan(text: 'This work is licensed under a '),
-                      TextSpan(text: 'Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License', style: TextStyle(color: AppColors.coral)),
+                      TextSpan(
+                          text:
+                              'Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License',
+                          style: TextStyle(color: AppColors.green)),
                       TextSpan(text: '.'),
                     ],
                   ),
@@ -179,10 +235,15 @@ class CodeOfConductLesson extends StatelessWidget {
                 const SizedBox(height: 32),
                 RichText(
                   text: TextSpan(
-                    style: TextStyle(color: AppColors.white, fontSize: 22, fontWeight: FontWeight.w700),
+                    style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700),
                     children: [
                       TextSpan(text: 'Using '),
-                      TextSpan(text: 'ADPList', style: TextStyle(color: AppColors.coral)),
+                      TextSpan(
+                          text: 'ADPList',
+                          style: TextStyle(color: AppColors.green)),
                       TextSpan(text: ' for FREE mentorship'),
                     ],
                   ),
@@ -190,15 +251,29 @@ class CodeOfConductLesson extends StatelessWidget {
                 const SizedBox(height: 16),
                 buildBulletPointRich(const [
                   TextSpan(text: 'We\'re recommending '),
-                  TextSpan(text: 'ADPList', style: TextStyle(color: AppColors.coral)),
-                  TextSpan(text: ' to get mentored for FREE at our own will. This isn\'t a sponsored text. ADPList is an amazing platform that all designers must leverage to the best. ADPList also comes out regularly with free courses and workshops. '),
-                  TextSpan(text: 'UX/UI Open', style: TextStyle(color: AppColors.coral)),
-                  TextSpan(text: ' shall not be responsible in any way as to what happens on '),
-                  TextSpan(text: 'ADPList', style: TextStyle(color: AppColors.coral)),
+                  TextSpan(
+                      text: 'ADPList',
+                      style: TextStyle(color: AppColors.green)),
+                  TextSpan(
+                      text:
+                          ' to get mentored for FREE at our own will. This isn\'t a sponsored text. ADPList is an amazing platform that all designers must leverage to the best. ADPList also comes out regularly with free courses and workshops. '),
+                  TextSpan(
+                      text: 'UX/UI Open',
+                      style: TextStyle(color: AppColors.green)),
+                  TextSpan(
+                      text:
+                          ' shall not be responsible in any way as to what happens on '),
+                  TextSpan(
+                      text: 'ADPList',
+                      style: TextStyle(color: AppColors.green)),
                   TextSpan(text: '. Please reach out to the team at '),
-                  TextSpan(text: 'ADPList', style: TextStyle(color: AppColors.coral)),
+                  TextSpan(
+                      text: 'ADPList',
+                      style: TextStyle(color: AppColors.green)),
                   TextSpan(text: ' for queries regarding '),
-                  TextSpan(text: 'ADPList', style: TextStyle(color: AppColors.coral)),
+                  TextSpan(
+                      text: 'ADPList',
+                      style: TextStyle(color: AppColors.green)),
                   TextSpan(text: '.'),
                 ]),
                 const SizedBox(height: 48),

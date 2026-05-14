@@ -334,7 +334,7 @@ class _VennPainter extends CustomPainter {
     const radius = 80.0;
 
     final uxPaint = Paint()
-      ..color = Colors.blue.withAlpha(100)
+      ..color = AppColors.greenLight.withAlpha(100)
       ..style = PaintingStyle.fill;
 
     final uiPaint = Paint()

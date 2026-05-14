@@ -136,17 +136,17 @@ class SectionTile extends StatelessWidget {
   });
 
   // Determine accent color based on section
-  static const _coralAccent = Color(0xFFE85D75);
-  static const _coralDim = Color(0xFF2A1F2D);
+  static const _greenAccent = AppColors.green;
+  static const _greenDim = AppColors.greenDim;
 
   Color get _accent {
     if (section.title.startsWith('01')) return AppColors.green;
-    return _coralAccent;
+    return _greenAccent;
   }
 
   Color get _dimBg {
     if (section.title.startsWith('01')) return AppColors.greenDim;
-    return _coralDim;
+    return _greenDim;
   }
 
   @override
@@ -208,7 +208,8 @@ class SectionTile extends StatelessWidget {
                   onTap: () => onLessonTap(lesson),
                   borderRadius: BorderRadius.circular(6),
                   child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 1),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 1),
                     padding:
                         const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                     decoration: BoxDecoration(
@@ -233,7 +234,9 @@ class SectionTile extends StatelessWidget {
                             style: TextStyle(
                               color: isSelected ? accent : AppColors.greyLight,
                               fontSize: 14,
-                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                              fontWeight: isSelected
+                                  ? FontWeight.w600
+                                  : FontWeight.w400,
                             ),
                           ),
                         ),

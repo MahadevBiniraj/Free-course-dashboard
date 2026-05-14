@@ -122,7 +122,7 @@ class FooterSection extends StatelessWidget {
               Row(
                 children: const [
                   Text('Made with ', style: TextStyle(color: AppColors.grey, fontSize: 13)),
-                  Icon(Icons.favorite, color: Colors.red, size: 13),
+                  Icon(Icons.favorite, color: AppColors.green, size: 13),
                   Text(' by Open Bootcamp', style: TextStyle(color: AppColors.grey, fontSize: 13)),
                 ],
               ),

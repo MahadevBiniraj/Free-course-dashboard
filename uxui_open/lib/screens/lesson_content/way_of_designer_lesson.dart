@@ -195,15 +195,15 @@ class _HexagonDiagramSection extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _HexNode('EMPATHIZE', AppColors.coral),
+                  _HexNode('EMPATHIZE', AppColors.green),
                   _Arrow(),
-                  _HexNode('DEFINE', AppColors.yellow),
+                  _HexNode('DEFINE', AppColors.greenLight),
                   _Arrow(),
                   _HexNode('IDEATE', AppColors.green),
                   _Arrow(),
-                  _HexNode('PROTOTYPE', const Color(0xFF3B82F6)), // Blue
+                  _HexNode('PROTOTYPE', AppColors.greenLight),
                   _Arrow(),
-                  _HexNode('TEST', const Color(0xFFA855F7)), // Purple
+                  _HexNode('TEST', AppColors.green),
                 ],
               ),
               const SizedBox(height: 24),
@@ -301,14 +301,14 @@ class _RolesSection extends StatelessWidget {
               title: 'Product Manager',
               desc: "Defines the 'what' and 'why'.",
               icon: Icons.lightbulb_outline,
-              color: AppColors.coral,
+              color: AppColors.green,
             ),
             const SizedBox(width: 16),
             _RoleCard(
               title: 'UX Designer',
               desc: "Focuses on the user journey and experience.",
               icon: Icons.route,
-              color: AppColors.yellow,
+              color: AppColors.greenLight,
             ),
             const SizedBox(width: 16),
             _RoleCard(
@@ -322,7 +322,7 @@ class _RolesSection extends StatelessWidget {
               title: 'Developer',
               desc: "Builds the product and brings the design to life.",
               icon: Icons.code,
-              color: const Color(0xFF3B82F6),
+              color: AppColors.greenLight,
             ),
           ],
         ),
@@ -388,8 +388,8 @@ class _DesignProcessPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
     
-    canvas.drawRect(Rect.fromCenter(center: center - const Offset(20, 20), width: 40, height: 40), Paint()..color = AppColors.coral.withOpacity(0.8));
-    canvas.drawCircle(center + const Offset(30, -10), 25, Paint()..color = AppColors.yellow.withOpacity(0.8));
+    canvas.drawRect(Rect.fromCenter(center: center - const Offset(20, 20), width: 40, height: 40), Paint()..color = AppColors.green.withOpacity(0.8));
+    canvas.drawCircle(center + const Offset(30, -10), 25, Paint()..color = AppColors.greenLight.withOpacity(0.8));
     canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromCenter(center: center + const Offset(-10, 30), width: 50, height: 30), const Radius.circular(8)), Paint()..color = AppColors.green.withOpacity(0.8));
 
     final cursorPath = Path()
@@ -453,9 +453,9 @@ class _VennDiagramPainter extends CustomPainter {
       canvas.drawCircle(c, r, Paint()..color = color.withOpacity(0.8)..style = PaintingStyle.stroke..strokeWidth = 2);
     }
 
-    drawCircle(topC, const Color(0xFF3B82F6));
-    drawCircle(botL, AppColors.coral);
-    drawCircle(botR, AppColors.green);
+    drawCircle(topC, AppColors.greenLight);
+    drawCircle(botL, AppColors.green);
+    drawCircle(botR, AppColors.greenLight);
 
     void drawLabel(String t, Offset pos, Color c) {
       final tp = TextPainter(
@@ -465,9 +465,9 @@ class _VennDiagramPainter extends CustomPainter {
       tp.paint(canvas, pos - Offset(tp.width / 2, tp.height / 2));
     }
 
-    drawLabel('Desirability', topC - const Offset(0, r + 8), const Color(0xFF3B82F6));
-    drawLabel('Viability', botL - const Offset(r * 0.8, -r * 0.8), AppColors.coral);
-    drawLabel('Feasibility', botR + const Offset(r * 0.8, r * 0.8), AppColors.green);
+    drawLabel('Desirability', topC - const Offset(0, r + 8), AppColors.greenLight);
+    drawLabel('Viability', botL - const Offset(r * 0.8, -r * 0.8), AppColors.green);
+    drawLabel('Feasibility', botR + const Offset(r * 0.8, r * 0.8), AppColors.greenLight);
   }
   @override
   bool shouldRepaint(covariant CustomPainter old) => false;
@@ -502,10 +502,10 @@ class _EmpathyMapPainter extends CustomPainter {
       tp.paint(canvas, pos - Offset(tp.width / 2, tp.height / 2));
     }
 
-    drawText('SAYS', Offset(cx / 2 + 10, cy / 2 + 10), AppColors.coral);
-    drawText('THINKS', Offset(cx + cx / 2 - 10, cy / 2 + 10), AppColors.yellow);
+    drawText('SAYS', Offset(cx / 2 + 10, cy / 2 + 10), AppColors.green);
+    drawText('THINKS', Offset(cx + cx / 2 - 10, cy / 2 + 10), AppColors.greenLight);
     drawText('DOES', Offset(cx / 2 + 10, cy + cy / 2 - 10), AppColors.green);
-    drawText('FEELS', Offset(cx + cx / 2 - 10, cy + cy / 2 - 10), const Color(0xFF3B82F6));
+    drawText('FEELS', Offset(cx + cx / 2 - 10, cy + cy / 2 - 10), AppColors.greenLight);
   }
   @override
   bool shouldRepaint(covariant CustomPainter old) => false;
@@ -517,7 +517,7 @@ class _MagnifierChartPainter extends CustomPainter {
     final cx = size.width / 2;
     final cy = size.height / 2;
     
-    final barPaint = Paint()..color = AppColors.coral.withOpacity(0.5);
+    final barPaint = Paint()..color = AppColors.green.withOpacity(0.5);
     final bars = [0.4, 0.7, 0.5, 0.9, 0.6, 0.8, 0.5];
     const barW = 10.0;
     final startX = cx - (bars.length * (barW + 8)) / 2;
@@ -534,9 +534,9 @@ class _MagnifierChartPainter extends CustomPainter {
 
     final magCenter = Offset(cx + 15, cy - 10);
     const magR = 30.0;
-    canvas.drawCircle(magCenter, magR, Paint()..color = const Color(0xFF3B82F6).withOpacity(0.15));
-    canvas.drawCircle(magCenter, magR, Paint()..color = const Color(0xFF3B82F6)..style = PaintingStyle.stroke..strokeWidth = 3);
-    canvas.drawLine(magCenter + const Offset(magR * 0.7, magR * 0.7), magCenter + const Offset(magR * 1.5, magR * 1.5), Paint()..color = const Color(0xFF3B82F6)..strokeWidth = 5..strokeCap = StrokeCap.round);
+    canvas.drawCircle(magCenter, magR, Paint()..color = AppColors.green.withOpacity(0.15));
+    canvas.drawCircle(magCenter, magR, Paint()..color = AppColors.green..style = PaintingStyle.stroke..strokeWidth = 3);
+    canvas.drawLine(magCenter + const Offset(magR * 0.7, magR * 0.7), magCenter + const Offset(magR * 1.5, magR * 1.5), Paint()..color = AppColors.green..strokeWidth = 5..strokeCap = StrokeCap.round);
   }
   @override
   bool shouldRepaint(covariant CustomPainter old) => false;
@@ -548,12 +548,12 @@ class _ProblemSolvingPainter extends CustomPainter {
     final cx = size.width / 2;
     final cy = size.height / 2;
 
-    final paint = Paint()..color = AppColors.yellow.withOpacity(0.8);
+    final paint = Paint()..color = AppColors.green.withOpacity(0.8);
     
     canvas.drawCircle(Offset(cx, cy - 15), 20, paint);
-    canvas.drawRect(Rect.fromCenter(center: Offset(cx, cy + 10), width: 16, height: 12), Paint()..color = AppColors.grey);
+    canvas.drawRect(Rect.fromCenter(center: Offset(cx, cy + 10), width: 16, height: 12), Paint()..color = AppColors.greyLight);
     
-    final rayPaint = Paint()..color = AppColors.yellow.withOpacity(0.5)..strokeWidth = 3..strokeCap = StrokeCap.round;
+    final rayPaint = Paint()..color = AppColors.greenLight.withOpacity(0.5)..strokeWidth = 3..strokeCap = StrokeCap.round;
     for (int i = 0; i < 5; i++) {
       final angle = -3.14 + (3.14 / 4) * i;
       final start = Offset(cx + 25 * math.cos(angle), cy - 15 + 25 * math.sin(angle));

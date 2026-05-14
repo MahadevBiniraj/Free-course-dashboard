@@ -12,20 +12,20 @@ const Color kDark = Color(0xFFFFFFFF);
 const Color kBody = Color(0xFFB3B3B3);
 const Color kSub = Color(0xFF888888);
 const Color kBorder = Color(0xFF333333);
-const Color kOlive = Color(0xFF9DB842);
-const Color kOliveBg = Color(0xFF262C18);
-const Color kOrange = Color(0xFFE87F3A);
-const Color kOrangeBg = Color(0xFF3D2111);
-const Color kBlue = Color(0xFF5BA3E8);
-const Color kBlueBg = Color(0xFF13283D);
-const Color kTeal = Color(0xFF4AC4B2);
-const Color kTealBg = Color(0xFF133630);
-const Color kPurple = Color(0xFFB181F2);
-const Color kPurpleBg = Color(0xFF2D1B42);
-const Color kYellow = Color(0xFFFFD12B);
-const Color kYellowBg = Color(0xFF3D320A);
+const Color kOlive = AppColors.green;
+const Color kOliveBg = AppColors.greenDim;
+const Color kOrange = AppColors.green;
+const Color kOrangeBg = AppColors.greenDim;
+const Color kBlue = AppColors.greenLight;
+const Color kBlueBg = AppColors.greenDim;
+const Color kTeal = AppColors.green;
+const Color kTealBg = AppColors.greenDim;
+const Color kPurple = AppColors.greenLight;
+const Color kPurpleBg = AppColors.greenDim;
+const Color kYellow = AppColors.green;
+const Color kYellowBg = AppColors.greenDim;
 const Color kNavBar = Color(0xFF1C1C1E);
-const Color kGreen = Color(0xFF39A86A);
+const Color kGreen = AppColors.green;
 
 // ── Root ──────────────────────────────────────────────────────────────────
 class DesignThinkingLesson extends StatelessWidget {
@@ -178,7 +178,7 @@ class _NoteBox extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.info_outline, size: 16, color: Color(0xFFB8860B)),
+          const Icon(Icons.info_outline, size: 16, color: kGreen),
           const SizedBox(width: 8),
           Expanded(
             child: RichText(
