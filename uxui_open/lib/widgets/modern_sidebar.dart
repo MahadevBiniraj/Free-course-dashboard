@@ -37,10 +37,10 @@ class _ModernSidebarState extends State<ModernSidebar> {
     return Container(
       width: 300,
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(24),
-          bottomRight: Radius.circular(24),
+        color: AppColors.background,
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(32),
+          bottomRight: Radius.circular(32),
         ),
         boxShadow: [
           BoxShadow(
@@ -106,12 +106,12 @@ class _ModernSidebarState extends State<ModernSidebar> {
           ),
           const SizedBox(width: 16),
           Text(
-            'UX/UI Open',
-            style: GoogleFonts.outfit(
+            'UX/UI Design',
+            style: TextStyle(fontFamily: 'Lufga', 
               color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              letterSpacing: -0.5,
+              fontSize: 22,
+              fontWeight: FontWeight.w800,
+              letterSpacing: -0.8,
             ),
           ),
         ],
@@ -124,7 +124,7 @@ class _ModernSidebarState extends State<ModernSidebar> {
       padding: const EdgeInsets.only(left: 12, top: 24, bottom: 8),
       child: Text(
         title.toUpperCase(),
-        style: GoogleFonts.outfit(
+        style: TextStyle(fontFamily: 'Lufga', 
           color: Colors.white.withOpacity(0.3),
           fontSize: 11,
           fontWeight: FontWeight.w800,
@@ -159,7 +159,7 @@ class _ModernSidebarState extends State<ModernSidebar> {
                   Expanded(
                     child: Text(
                       section.title,
-                      style: GoogleFonts.outfit(
+                      style: TextStyle(fontFamily: 'Lufga', 
                         color: isExpanded ? AppColors.accent : AppColors.greyLight,
                         fontSize: 16,
                         fontWeight: isExpanded ? FontWeight.w600 : FontWeight.w500,
@@ -214,8 +214,8 @@ class _ModernSidebarState extends State<ModernSidebar> {
               Expanded(
                 child: Text(
                   cleanText,
-                  style: GoogleFonts.outfit(
-                    color: isSelected ? Colors.white : const Color(0xFFB2BEC3),
+                  style: TextStyle(fontFamily: 'Lufga', 
+                    color: isSelected ? Colors.white : AppColors.greyLight,
                     fontSize: 14,
                     fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
                   ),
@@ -224,7 +224,7 @@ class _ModernSidebarState extends State<ModernSidebar> {
               if (hasStar)
                 const Icon(
                   Icons.star,
-                  color: Color(0xFFFDCB6E),
+                  color: AppColors.yellow,
                   size: 14,
                 ),
             ],
@@ -246,14 +246,14 @@ class _ModernSidebarState extends State<ModernSidebar> {
               border: Border(top: BorderSide(color: Colors.white.withOpacity(0.05))),
             ),
             child: const Icon(Icons.keyboard_double_arrow_left,
-                color: Color(0xFFB2BEC3), size: 20),
+                color: AppColors.greyLight, size: 20),
           ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Text(
             'Modern Dashboard v2.0',
-            style: GoogleFonts.outfit(
+            style: TextStyle(fontFamily: 'Lufga', 
               color: Colors.white.withOpacity(0.2),
               fontSize: 12,
             ),

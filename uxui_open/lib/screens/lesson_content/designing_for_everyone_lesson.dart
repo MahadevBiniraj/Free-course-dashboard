@@ -39,40 +39,36 @@ class DesigningForEveryoneLesson extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Hero Section
                       _HeroSection(isMobile: isMobile),
-
                       Padding(
-                        padding: EdgeInsets.all(isMobile ? 20 : 40),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Introduction
-                            _IntroSection(),
-                            const SizedBox(height: 60),
-
-                            // The Curb-Cut Effect
-                            _CurbCutSection(isMobile: isMobile),
-                            const SizedBox(height: 60),
-
-                            // WCAG Principles (POUR)
-                            _WcagSection(isMobile: isMobile),
-                            const SizedBox(height: 60),
-
-                            // Dimensions of Accessibility
-                            _DimensionsSection(isMobile: isMobile),
-                            const SizedBox(height: 60),
-
-                            // Conclusion
-                            _ConclusionSection(),
-                            
-                            const SizedBox(height: 40),
-                            const PrevNextBar(
-                              prevLabel: '2.5 The Visuals',
-                              nextLabel: '2.7 Design Process',
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isMobile ? 24 : 60,
+                          vertical: isMobile ? 32 : 80,
+                        ),
+                        child: Center(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 900),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _IntroSection(),
+                                const SizedBox(height: 100),
+                                _CurbCutSection(isMobile: isMobile),
+                                const SizedBox(height: 100),
+                                _WcagSection(isMobile: isMobile),
+                                const SizedBox(height: 100),
+                                _DimensionsSection(isMobile: isMobile),
+                                const SizedBox(height: 100),
+                                _ConclusionSection(),
+                                const SizedBox(height: 80),
+                                const PrevNextBar(
+                                  prevLabel: '2.5 The Visuals',
+                                  nextLabel: '2.7 Design Process',
+                                ),
+                                const SizedBox(height: 60),
+                              ],
                             ),
-                            const SizedBox(height: 40),
-                          ],
+                          ),
                         ),
                       ),
                     ],
@@ -115,52 +111,48 @@ class _HeroSection extends StatelessWidget {
             ],
           ),
         ),
-        padding: EdgeInsets.all(isMobile ? 20 : 60),
+        padding: EdgeInsets.all(isMobile ? 24 : 80),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
                   colors: [AppColors.accent, AppColors.accentDeep],
                 ),
-                borderRadius: BorderRadius.circular(6),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.accent.withOpacity(0.3),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
+                borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 'LESSON 2.6',
-                style: GoogleFonts.outfit(
+                style: TextStyle(fontFamily: 'Lufga', 
                   color: Colors.white,
                   fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2.0,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 2.5,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 32),
             Text(
               'Designing For\nEveryone',
-              style: GoogleFonts.outfit(
+              style: TextStyle(fontFamily: 'Lufga', 
                 color: Colors.white,
-                fontSize: isMobile ? 36 : 64,
-                fontWeight: FontWeight.bold,
-                height: 1.1,
+                fontSize: isMobile ? 40 : 80,
+                fontWeight: FontWeight.w900,
+                height: 1.0,
+                letterSpacing: -2.0,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             Text(
               'Building a web that is inclusive, accessible, and human-centric.',
-              style: GoogleFonts.outfit(
+              style: TextStyle(fontFamily: 'Lufga', 
                 color: AppColors.greyLight,
-                fontSize: isMobile ? 16 : 20,
+                fontSize: isMobile ? 18 : 24,
+                fontWeight: FontWeight.w400,
+                letterSpacing: -0.2,
               ),
             ),
           ],
@@ -178,7 +170,7 @@ class _IntroSection extends StatelessWidget {
       children: [
         Text(
           'The Power of Inclusive Design',
-          style: GoogleFonts.outfit(
+          style: TextStyle(fontFamily: 'Lufga', 
             color: AppColors.accent,
             fontSize: 28,
             fontWeight: FontWeight.bold,
@@ -188,7 +180,7 @@ class _IntroSection extends StatelessWidget {
         const SizedBox(height: 16),
         Text(
           'Accessibility is not a "feature" to be added at the end; it is a fundamental human right. In 2026, designing for everyone means creating experiences that work for users regardless of their physical, cognitive, or situational circumstances. When we design for the edges, we better define the middle.',
-          style: GoogleFonts.outfit(
+          style: TextStyle(fontFamily: 'Lufga', 
             color: AppColors.greyLight,
             fontSize: 18,
             height: 1.6,
@@ -214,7 +206,7 @@ class _CurbCutSection extends StatelessWidget {
             const SizedBox(width: 12),
             Text(
               'The Curb-Cut Effect',
-              style: GoogleFonts.outfit(
+              style: TextStyle(fontFamily: 'Lufga', 
                 color: Colors.white,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -265,7 +257,7 @@ class _CurbCutContent extends StatelessWidget {
       children: [
         Text(
           'Named after the physical ramps on sidewalks designed for wheelchair users, the "Curb-Cut Effect" describes how accessibility features benefit everyone.',
-          style: GoogleFonts.outfit(
+          style: TextStyle(fontFamily: 'Lufga', 
             color: AppColors.greyLight,
             fontSize: 16,
             height: 1.6,
@@ -328,7 +320,7 @@ class _BenefitItem extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.outfit(
+                  style: TextStyle(fontFamily: 'Lufga', 
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -336,7 +328,7 @@ class _BenefitItem extends StatelessWidget {
                 ),
                 Text(
                   desc,
-                  style: GoogleFonts.outfit(
+                  style: TextStyle(fontFamily: 'Lufga', 
                     color: AppColors.greyLight,
                     fontSize: 14,
                   ),
@@ -375,7 +367,7 @@ class _WcagSection extends StatelessWidget {
         children: [
           Text(
             'The WCAG POUR Framework',
-            style: GoogleFonts.outfit(
+            style: TextStyle(fontFamily: 'Lufga', 
               color: Colors.white,
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -436,7 +428,7 @@ class _PourItem extends StatelessWidget {
         children: [
           Text(
             title,
-            style: GoogleFonts.outfit(
+            style: TextStyle(fontFamily: 'Lufga', 
               foreground: Paint()
                 ..shader = const LinearGradient(
                   colors: [AppColors.accent, AppColors.accentDeep],
@@ -447,7 +439,7 @@ class _PourItem extends StatelessWidget {
           ),
           Text(
             name,
-            style: GoogleFonts.outfit(
+            style: TextStyle(fontFamily: 'Lufga', 
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -457,7 +449,7 @@ class _PourItem extends StatelessWidget {
           Text(
             desc,
             textAlign: TextAlign.center,
-            style: GoogleFonts.outfit(
+            style: TextStyle(fontFamily: 'Lufga', 
               color: AppColors.greyLight,
               fontSize: 14,
             ),
@@ -479,7 +471,7 @@ class _DimensionsSection extends StatelessWidget {
       children: [
         Text(
           'Dimensions of Accessibility',
-          style: GoogleFonts.outfit(
+          style: TextStyle(fontFamily: 'Lufga', 
             color: Colors.white,
             fontSize: 28,
             fontWeight: FontWeight.bold,
@@ -546,7 +538,7 @@ class _DimensionCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.outfit(
+                  style: TextStyle(fontFamily: 'Lufga', 
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -554,7 +546,7 @@ class _DimensionCard extends StatelessWidget {
                 ),
                 Text(
                   desc,
-                  style: GoogleFonts.outfit(
+                  style: TextStyle(fontFamily: 'Lufga', 
                     color: AppColors.greyLight,
                     fontSize: 14,
                   ),
@@ -589,7 +581,7 @@ class _ConclusionSection extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             'The Ultimate Goal',
-            style: GoogleFonts.outfit(
+            style: TextStyle(fontFamily: 'Lufga', 
               color: Colors.white,
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -599,7 +591,7 @@ class _ConclusionSection extends StatelessWidget {
           Text(
             'Inclusive design doesn\'t mean "one size fits all." It means "one size fits one." By creating flexible systems that adapt to the individual needs of every user, we build a more equitable digital world.',
             textAlign: TextAlign.center,
-            style: GoogleFonts.outfit(
+            style: TextStyle(fontFamily: 'Lufga', 
               color: AppColors.greyLight,
               fontSize: 18,
               height: 1.6,

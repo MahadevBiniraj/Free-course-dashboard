@@ -4,7 +4,6 @@ import '../theme/app_theme.dart';
 import '../widgets/nav_sidebar.dart';
 import '../widgets/modern_sidebar.dart';
 
-
 // Lesson Imports
 import 'package:uxui_open/screens/lesson_content/welcome_lesson.dart';
 import 'package:uxui_open/screens/lesson_content/code_of_conduct_lesson.dart';

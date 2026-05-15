@@ -5,16 +5,16 @@ import '../../widgets/breadcrumb_bar.dart';
 import '../../widgets/lesson_widgets.dart';
 
 // ── Palette ────────────────────────────────────────────────────────────────
-const Color kBg = Color(0xFF0F0F11);
-const Color kCardBg = Color(0xFF1C1C1E);
-const Color kWhite = Color(0xFFFFFFFF);
-const Color kDark = Color(0xFFFFFFFF);
-const Color kBody = Color(0xFFB3B3B3);
-const Color kSub = Color(0xFF888888);
-const Color kBorder = Color(0xFF333333);
+const Color kBg = AppColors.background;
+const Color kCardBg = AppColors.cardBackground;
+const Color kWhite = AppColors.white;
+const Color kDark = AppColors.white;
+const Color kBody = AppColors.greyLight;
+const Color kSub = AppColors.grey;
+const Color kBorder = AppColors.cardBorder;
 const Color kOlive = AppColors.green;
 const Color kOliveBg = AppColors.greenDim;
-const Color kOrange = AppColors.green;
+const Color kOrange = AppColors.accent;
 const Color kOrangeBg = AppColors.greenDim;
 const Color kBlue = AppColors.greenLight;
 const Color kBlueBg = AppColors.greenDim;
@@ -22,9 +22,9 @@ const Color kTeal = AppColors.green;
 const Color kTealBg = AppColors.greenDim;
 const Color kPurple = AppColors.greenLight;
 const Color kPurpleBg = AppColors.greenDim;
-const Color kYellow = AppColors.green;
+const Color kYellow = AppColors.yellow;
 const Color kYellowBg = AppColors.greenDim;
-const Color kNavBar = Color(0xFF1C1C1E);
+const Color kNavBar = AppColors.cardBackground;
 const Color kGreen = AppColors.green;
 
 // ── Root ──────────────────────────────────────────────────────────────────

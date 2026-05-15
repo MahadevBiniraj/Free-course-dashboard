@@ -37,7 +37,8 @@ class ProgressSection extends StatelessWidget {
                     border: Border.all(color: AppColors.cardBorder),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Icon(Icons.arrow_forward_ios, color: AppColors.greyLight, size: 16),
+                  child: const Icon(Icons.arrow_forward_ios,
+                      color: AppColors.greyLight, size: 16),
                 ),
               ],
             ),
@@ -50,13 +51,14 @@ class ProgressSection extends StatelessWidget {
                   width: 100,
                   height: 100,
                   child: Stack(
-                     fit: StackFit.expand,
+                    fit: StackFit.expand,
                     children: [
                       CircularProgressIndicator(
                         value: 0.68,
                         strokeWidth: 10,
                         backgroundColor: AppColors.cardBorder,
-                        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.green),
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                            AppColors.green),
                         strokeCap: StrokeCap.round,
                       ),
                       const Center(
@@ -69,7 +71,8 @@ class ProgressSection extends StatelessWidget {
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold)),
                             Text('Completed',
-                                style: TextStyle(color: AppColors.grey, fontSize: 10)),
+                                style: TextStyle(
+                                    color: AppColors.grey, fontSize: 10)),
                           ],
                         ),
                       ),
@@ -82,7 +85,8 @@ class ProgressSection extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Flutter Development Bootcamp', style: AppTextStyles.heading3),
+                      const Text('Flutter Development Bootcamp',
+                          style: AppTextStyles.heading3),
                       const SizedBox(height: 14),
                       // Progress bar
                       ClipRRect(
@@ -90,22 +94,28 @@ class ProgressSection extends StatelessWidget {
                         child: LinearProgressIndicator(
                           value: 12 / 18,
                           backgroundColor: AppColors.cardBorder,
-                          valueColor: const AlwaysStoppedAnimation<Color>(AppColors.green),
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                              AppColors.green),
                           minHeight: 10,
                         ),
                       ),
                       const SizedBox(height: 10),
-                      const Text('12 of 18 Modules Completed', style: AppTextStyles.body),
+                      const Text('12 of 18 Modules Completed',
+                          style: AppTextStyles.body),
                       const SizedBox(height: 16),
                       OutlinedButton.icon(
                         onPressed: () {},
-                        icon: const Icon(Icons.bar_chart, size: 16, color: AppColors.greyLight),
+                        icon: const Icon(Icons.bar_chart,
+                            size: 16, color: AppColors.greyLight),
                         label: const Text('View Detailed Progress',
-                            style: TextStyle(color: AppColors.greyLight, fontSize: 13)),
+                            style: TextStyle(
+                                color: AppColors.greyLight, fontSize: 13)),
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: AppColors.greyDark),
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 10),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                         ),
                       ),
                     ],
@@ -124,12 +134,20 @@ class ProgressSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text('Next Up',
-                          style: TextStyle(color: AppColors.green, fontSize: 13, fontWeight: FontWeight.w600)),
+                          style: TextStyle(
+                              color: AppColors.green,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600)),
                       const SizedBox(height: 8),
-                      const Text('Module 2', style: TextStyle(color: AppColors.grey, fontSize: 13)),
+                      const Text('Module 2',
+                          style:
+                              TextStyle(color: AppColors.grey, fontSize: 13)),
                       const SizedBox(height: 4),
                       const Text('2.4 Understanding\nUsers',
-                          style: TextStyle(color: AppColors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                          style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold)),
                       const SizedBox(height: 16),
                       ElevatedButton.icon(
                         onPressed: () {
@@ -143,12 +161,16 @@ class ProgressSection extends StatelessWidget {
                           );
                         },
                         icon: const Icon(Icons.play_arrow, size: 16),
-                        label: const Text('Continue', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                        label: const Text('Continue',
+                            style: TextStyle(
+                                fontSize: 13, fontWeight: FontWeight.bold)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.green,
                           foregroundColor: Colors.black,
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                           elevation: 0,
                         ),
                       ),

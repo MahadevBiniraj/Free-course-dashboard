@@ -43,7 +43,8 @@ class VisualsLesson extends StatelessWidget {
 
                 // ── Learning Objective ─────────────────────────────────────
                 const _LearningObjectiveBox(
-                  text: 'By the end of this checkpoint, you will be able to explain the importance of visual design in UX and identify the key principles that guide modern interface design.',
+                  text:
+                      'By the end of this checkpoint, you will be able to explain the importance of visual design in UX and identify the key principles that guide modern interface design.',
                 ),
                 const SizedBox(height: 32),
 
@@ -53,10 +54,11 @@ class VisualsLesson extends StatelessWidget {
                   style: AppTextStyles.body,
                 ),
                 const SizedBox(height: 24),
-                
+
                 _ImageCard(
                   imagePath: 'assets/images/visuals/ux_ui_devices.png',
-                  caption: 'Visual design spans across multiple platforms and devices.',
+                  caption:
+                      'Visual design spans across multiple platforms and devices.',
                 ),
                 const SizedBox(height: 32),
 
@@ -68,27 +70,31 @@ class VisualsLesson extends StatelessWidget {
                   style: AppTextStyles.body,
                 ),
                 const SizedBox(height: 20),
-                
+
                 _PrincipleRow(
                   icon: Icons.text_fields,
                   title: 'Typography',
-                  desc: 'Choosing the right fonts to ensure readability and establish hierarchy.',
+                  desc:
+                      'Choosing the right fonts to ensure readability and establish hierarchy.',
                 ),
                 _PrincipleRow(
                   icon: Icons.palette,
                   title: 'Color Theory',
-                  desc: 'Using color palettes that evoke the right mood and pass accessibility checks.',
+                  desc:
+                      'Using color palettes that evoke the right mood and pass accessibility checks.',
                 ),
                 _PrincipleRow(
                   icon: Icons.grid_view,
                   title: 'Grid & Layout',
-                  desc: 'Organizing elements in a structured way to create visual balance.',
+                  desc:
+                      'Organizing elements in a structured way to create visual balance.',
                 ),
                 const SizedBox(height: 24),
-                
+
                 _ImageCard(
                   imagePath: 'assets/images/visuals/ux_elements_grid.png',
-                  caption: 'Consistency in UI elements is key to a professional look.',
+                  caption:
+                      'Consistency in UI elements is key to a professional look.',
                 ),
                 const SizedBox(height: 32),
 
@@ -100,13 +106,16 @@ class VisualsLesson extends StatelessWidget {
                   style: AppTextStyles.body,
                 ),
                 const SizedBox(height: 28),
-                
+
                 const Center(child: VennDiagramWidget()),
                 const SizedBox(height: 12),
                 const Center(
                   child: Text(
                     'The sweet spot: where usability meets aesthetic excellence.',
-                    style: TextStyle(color: AppColors.greyLight, fontSize: 13, fontStyle: FontStyle.italic),
+                    style: TextStyle(
+                        color: AppColors.greyLight,
+                        fontSize: 13,
+                        fontStyle: FontStyle.italic),
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -119,7 +128,7 @@ class VisualsLesson extends StatelessWidget {
                   style: AppTextStyles.body,
                 ),
                 const SizedBox(height: 24),
-                
+
                 _ImageCard(
                   imagePath: 'assets/images/visuals/design_collaboration.png',
                   caption: 'Design is a team sport.',
@@ -134,10 +143,11 @@ class VisualsLesson extends StatelessWidget {
                   style: AppTextStyles.body,
                 ),
                 const SizedBox(height: 24),
-                
+
                 _ImageCard(
                   imagePath: 'assets/images/visuals/ar_glasses.png',
-                  caption: 'Spatial design is the next frontier for visual designers.',
+                  caption:
+                      'Spatial design is the next frontier for visual designers.',
                 ),
                 const SizedBox(height: 48),
 
@@ -191,7 +201,7 @@ class _LearningObjectiveBox extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF0D2818),
+        color: AppColors.greenDim,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: AppColors.green.withAlpha(80), width: 1.5),
       ),
@@ -278,7 +288,8 @@ class _PrincipleRow extends StatelessWidget {
   final String title;
   final String desc;
 
-  const _PrincipleRow({super.key, required this.icon, required this.title, required this.desc});
+  const _PrincipleRow(
+      {super.key, required this.icon, required this.title, required this.desc});
 
   @override
   Widget build(BuildContext context) {
@@ -300,9 +311,15 @@ class _PrincipleRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(color: AppColors.white, fontSize: 17, fontWeight: FontWeight.w700)),
+                Text(title,
+                    style: const TextStyle(
+                        color: AppColors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700)),
                 const SizedBox(height: 4),
-                Text(desc, style: const TextStyle(color: AppColors.greyLight, fontSize: 14, height: 1.5)),
+                Text(desc,
+                    style: const TextStyle(
+                        color: AppColors.greyLight, fontSize: 14, height: 1.5)),
               ],
             ),
           ),
@@ -357,10 +374,12 @@ class _VennPainter extends CustomPainter {
     // Labels
     _drawText(canvas, "UX", Offset(center.dx - 70, center.dy - 10));
     _drawText(canvas, "UI", Offset(center.dx + 50, center.dy - 10));
-    _drawText(canvas, "Product Design", Offset(center.dx - 35, center.dy + 85), fontSize: 12, isBold: true);
+    _drawText(canvas, "Product Design", Offset(center.dx - 35, center.dy + 85),
+        fontSize: 12, isBold: true);
   }
 
-  void _drawText(Canvas canvas, String text, Offset offset, {double fontSize = 16, bool isBold = false}) {
+  void _drawText(Canvas canvas, String text, Offset offset,
+      {double fontSize = 16, bool isBold = false}) {
     final textPainter = TextPainter(
       text: TextSpan(
         text: text,

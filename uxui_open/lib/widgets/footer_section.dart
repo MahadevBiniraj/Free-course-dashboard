@@ -37,20 +37,28 @@ class FooterSection extends StatelessWidget {
                           width: 32,
                           height: 32,
                           decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.green, width: 1.5),
+                            border:
+                                Border.all(color: AppColors.green, width: 1.5),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Icon(Icons.all_inclusive, color: AppColors.green, size: 18),
+                          child: const Icon(Icons.all_inclusive,
+                              color: AppColors.green, size: 18),
                         ),
                         const SizedBox(width: 12),
                         const Text('UX/UI Open',
-                            style: TextStyle(color: AppColors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                            style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold)),
                       ],
                     ),
                     const SizedBox(height: 16),
                     const Text(
                       'Empowering learners to build\ncareer-ready portfolios and\nreal-world experience.',
-                      style: TextStyle(color: AppColors.greyLight, fontSize: 14, height: 1.6),
+                      style: TextStyle(
+                          color: AppColors.greyLight,
+                          fontSize: 14,
+                          height: 1.6),
                     ),
                     const SizedBox(height: 24),
                     Row(
@@ -121,9 +129,11 @@ class FooterSection extends StatelessWidget {
                   style: TextStyle(color: AppColors.grey, fontSize: 13)),
               Row(
                 children: const [
-                  Text('Made with ', style: TextStyle(color: AppColors.grey, fontSize: 13)),
+                  Text('Made with ',
+                      style: TextStyle(color: AppColors.grey, fontSize: 13)),
                   Icon(Icons.favorite, color: AppColors.green, size: 13),
-                  Text(' by Open Bootcamp', style: TextStyle(color: AppColors.grey, fontSize: 13)),
+                  Text(' by Open Bootcamp',
+                      style: TextStyle(color: AppColors.grey, fontSize: 13)),
                 ],
               ),
               const Text('Trusted by 10K+ Students',
@@ -153,24 +163,33 @@ class _FooterColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title,
-            style: const TextStyle(color: AppColors.white, fontSize: 15, fontWeight: FontWeight.w600)),
+            style: const TextStyle(
+                color: AppColors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.w600)),
         const SizedBox(height: 16),
         ...items.map((item) => Padding(
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 children: [
-                  Text(item.text, style: const TextStyle(color: AppColors.greyLight, fontSize: 14)),
+                  Text(item.text,
+                      style: const TextStyle(
+                          color: AppColors.greyLight, fontSize: 14)),
                   if (item.badge != null) ...[
                     const SizedBox(width: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
                         border: Border.all(color: AppColors.green),
                         borderRadius: BorderRadius.circular(4),
                         color: AppColors.green.withOpacity(0.1),
                       ),
                       child: Text(item.badge!,
-                          style: const TextStyle(color: AppColors.green, fontSize: 10, fontWeight: FontWeight.bold)),
+                          style: const TextStyle(
+                              color: AppColors.green,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ],

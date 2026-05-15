@@ -12,8 +12,8 @@ class NavButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       decoration: BoxDecoration(
         color: AppColors.cardBackground,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.cardBorder),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppColors.cardBorder, width: 1.0),
       ),
       child: Text(
         label,
@@ -121,11 +121,11 @@ class LessonCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.cardBackground,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.cardBorder, width: 1.2),
+          border: Border.all(color: AppColors.cardBorder, width: 1.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
+              color: Colors.black.withOpacity(0.4),
+              blurRadius: 40,
               offset: const Offset(0, 4),
             ),
           ],
@@ -235,11 +235,11 @@ class LessonTile extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           decoration: BoxDecoration(
-            color: isActive ? AppColors.accent.withOpacity(0.08) : AppColors.cardBackground,
+            color: isActive ? AppColors.accent.withOpacity(0.04) : Colors.transparent,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: isActive ? AppColors.accent.withOpacity(0.4) : AppColors.cardBorder,
-              width: isActive ? 1.5 : 1.0,
+              color: isActive ? AppColors.accent.withOpacity(0.2) : AppColors.cardBorder,
+              width: 1.0,
             ),
           ),
           child: Row(

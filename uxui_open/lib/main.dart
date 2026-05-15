@@ -21,7 +21,7 @@ class UXUIOpenApp extends StatelessWidget {
           primary: AppColors.green,
           surface: AppColors.cardBackground,
         ),
-        fontFamily: 'Roboto',
+        fontFamily: 'Lufga',
       ),
       home: const DashboardScreen(),
     );

@@ -24,7 +24,8 @@ class ActionCardsRow extends StatelessWidget {
             child: _ActionCard(
               icon: Icons.people_outline,
               title: 'Join Community',
-              description: 'Connect with learners, get help and share knowledge.',
+              description:
+                  'Connect with learners, get help and share knowledge.',
               linkText: 'Join Now',
               decorationWidget: _PeopleDecoration(),
             ),
@@ -108,7 +109,8 @@ class _ActionCard extends StatelessWidget {
                   children: [
                     Text(linkText, style: AppTextStyles.label),
                     const SizedBox(width: 6),
-                    const Icon(Icons.arrow_forward, color: AppColors.green, size: 16),
+                    const Icon(Icons.arrow_forward,
+                        color: AppColors.green, size: 16),
                   ],
                 ),
               ],
@@ -128,7 +130,8 @@ class _TrophyDecoration extends StatelessWidget {
       child: Container(
         width: 80,
         height: 100,
-        child: const Icon(Icons.emoji_events, color: Color(0xFF888866), size: 80),
+        child:
+            const Icon(Icons.emoji_events, color: Color(0xFF888866), size: 80),
       ),
     );
   }
@@ -156,7 +159,8 @@ class _TargetDecoration extends StatelessWidget {
       child: SizedBox(
         width: 80,
         height: 80,
-        child: const Icon(Icons.track_changes, color: AppColors.green, size: 70),
+        child:
+            const Icon(Icons.track_changes, color: AppColors.green, size: 70),
       ),
     );
   }

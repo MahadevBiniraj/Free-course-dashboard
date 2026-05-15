@@ -13,7 +13,8 @@ class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
       height: 72,
       decoration: const BoxDecoration(
         color: AppColors.background, // Matched with background
-        border: Border(bottom: BorderSide(color: AppColors.cardBorder, width: 1.5)),
+        border:
+            Border(bottom: BorderSide(color: AppColors.cardBorder, width: 1.5)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Row(
@@ -29,11 +30,16 @@ class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
               border: Border.all(color: AppColors.green, width: 1.5),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Icon(Icons.all_inclusive, color: AppColors.green, size: 18),
+            child: const Icon(Icons.all_inclusive,
+                color: AppColors.green, size: 18),
           ),
           const SizedBox(width: 12),
           const Text('UX/UI Open',
-              style: TextStyle(color: AppColors.white, fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: -0.2)),
+              style: TextStyle(
+                  color: AppColors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -0.2)),
           const Spacer(),
           // Live Chat
           _NavButton(
@@ -52,7 +58,8 @@ class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
           // Notification bell
           Stack(
             children: [
-              const Icon(Icons.notifications_none, color: AppColors.greyLight, size: 28),
+              const Icon(Icons.notifications_none,
+                  color: AppColors.greyLight, size: 28),
               Positioned(
                 right: 0,
                 top: 0,
@@ -64,7 +71,11 @@ class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
                     shape: BoxShape.circle,
                   ),
                   child: const Center(
-                    child: Text('9', style: TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold)),
+                    child: Text('9',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold)),
                   ),
                 ),
               ),
@@ -80,11 +91,16 @@ class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
               shape: BoxShape.circle,
             ),
             child: const Center(
-              child: Text('A', style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold)),
+              child: Text('A',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold)),
             ),
           ),
           const SizedBox(width: 6),
-          const Icon(Icons.keyboard_arrow_down, color: AppColors.greyLight, size: 20),
+          const Icon(Icons.keyboard_arrow_down,
+              color: AppColors.greyLight, size: 20),
         ],
       ),
     );
@@ -96,7 +112,8 @@ class _NavButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
 
-  const _NavButton({required this.icon, required this.label, required this.onTap});
+  const _NavButton(
+      {required this.icon, required this.label, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +129,11 @@ class _NavButton extends StatelessWidget {
           children: [
             Icon(icon, color: AppColors.greyLight, size: 16),
             const SizedBox(width: 6),
-            Text(label, style: const TextStyle(color: AppColors.greyLight, fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(label,
+                style: const TextStyle(
+                    color: AppColors.greyLight,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600)),
           ],
         ),
       ),
