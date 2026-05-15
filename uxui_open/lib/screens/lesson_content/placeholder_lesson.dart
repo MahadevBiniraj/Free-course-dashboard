@@ -33,7 +33,7 @@ class PlaceholderLesson extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.construction, color: AppColors.green, size: 48),
+                const Icon(Icons.auto_awesome_outlined, color: AppColors.accent, size: 48),
                 const SizedBox(height: 24),
                 Text(
                   '$title content coming soon',

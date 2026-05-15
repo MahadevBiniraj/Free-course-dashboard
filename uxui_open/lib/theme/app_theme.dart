@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const background = Color(0xFF0A0A0A);
-  static const cardBackground = Color(0xFF111111);
-  static const cardBorder = Color(0xFF1E1E1E);
-  static const green = Color(0xFF00C853);
-  static const greenLight = Color(0xFF00FF7F);
-  static const greenDim = Color(0xFF1A3A2A);
-  static const white = Color(0xFFFFFFFF);
-  static const grey = Color(0xFF888888);
-  static const greyLight = Color(0xFFAAAAAA);
-  static const greyDark = Color(0xFF333333);
-  static const yellow = Color(0xFFFFD700);
+  static const background = Color(0xFF0C1210); // Deep Forest Obsidian
+  static const cardBackground = Color(0xFF161D1B); // Dark Emerald Surface
+  static const cardBorder = Color(0xFF242E2A); // Subtle Forest Border
+  static const accent = Color(0xFF10B981); // Emerald (Premium)
+  static const accentDeep = Color(0xFF059669); // Deep Emerald
+  static const green = Color(0xFF10B981); // Primary Green
+  static const greenLight = Color(0xFF34D399); // Soft Mint
+  static const greenDim = Color(0xFF064E3B); // Forest Dim
+  static const white = Color(0xFFF9FAFB); 
+  static const grey = Color(0xFF6B7280); 
+  static const greyLight = Color(0xFF9CA3AF);
+  static const greyDark = Color(0xFF1F2937);
+  static const yellow = Color(0xFFFBBF24);
 }
 
 class AppTextStyles {

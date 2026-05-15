@@ -31,7 +31,7 @@ class DesigningForEveryoneLesson extends StatelessWidget {
         ),
         Expanded(
           child: Container(
-            color: const Color(0xFF121212),
+            color: AppColors.background,
             child: LayoutBuilder(
               builder: (context, constraints) {
                 final bool isMobile = constraints.maxWidth < 800;
@@ -123,16 +123,25 @@ class _HeroSection extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: AppColors.green,
-                borderRadius: BorderRadius.circular(4),
+                gradient: const LinearGradient(
+                  colors: [AppColors.accent, AppColors.accentDeep],
+                ),
+                borderRadius: BorderRadius.circular(6),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.accent.withOpacity(0.3),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
               child: Text(
                 'LESSON 2.6',
                 style: GoogleFonts.outfit(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  letterSpacing: 1.2,
+                  letterSpacing: 2.0,
                 ),
               ),
             ),
@@ -170,9 +179,10 @@ class _IntroSection extends StatelessWidget {
         Text(
           'The Power of Inclusive Design',
           style: GoogleFonts.outfit(
-            color: AppColors.green,
-            fontSize: 24,
+            color: AppColors.accent,
+            fontSize: 28,
             fontWeight: FontWeight.bold,
+            letterSpacing: -0.5,
           ),
         ),
         const SizedBox(height: 16),
@@ -200,7 +210,7 @@ class _CurbCutSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Icon(Icons.diversity_3, color: AppColors.green, size: 28),
+            const Icon(Icons.diversity_3, color: AppColors.accent, size: 28),
             const SizedBox(width: 12),
             Text(
               'The Curb-Cut Effect',
@@ -296,8 +306,22 @@ class _BenefitItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: AppColors.green, size: 20),
-          const SizedBox(width: 12),
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: AppColors.accent,
+              borderRadius: BorderRadius.circular(6),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.accent.withOpacity(0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Icon(icon, color: Colors.white, size: 20),
+          ),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -335,9 +359,16 @@ class _WcagSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1E1E),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white10),
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: AppColors.cardBorder, width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 30,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -406,9 +437,12 @@ class _PourItem extends StatelessWidget {
           Text(
             title,
             style: GoogleFonts.outfit(
-              color: AppColors.green,
-              fontSize: 48,
-              fontWeight: FontWeight.bold,
+              foreground: Paint()
+                ..shader = const LinearGradient(
+                  colors: [AppColors.accent, AppColors.accentDeep],
+                ).createShader(const Rect.fromLTWH(0.0, 0.0, 100.0, 50.0)),
+              fontSize: 56,
+              fontWeight: FontWeight.w900,
             ),
           ),
           Text(
@@ -483,19 +517,26 @@ class _DimensionCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1E1E),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white10),
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: AppColors.cardBorder, width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 30,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.green.withOpacity(0.1),
+              color: AppColors.accent.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: AppColors.green, size: 24),
+            child: Icon(icon, color: AppColors.accent, size: 24),
           ),
           const SizedBox(width: 20),
           Expanded(
@@ -535,16 +576,16 @@ class _ConclusionSection extends StatelessWidget {
       padding: const EdgeInsets.all(40),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.green.withOpacity(0.2), Colors.transparent],
+          colors: [AppColors.accent.withOpacity(0.15), Colors.transparent],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.green.withOpacity(0.3)),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: AppColors.accent.withOpacity(0.2)),
       ),
       child: Column(
         children: [
-          const Icon(Icons.star, color: AppColors.green, size: 40),
+          const Icon(Icons.auto_awesome, color: AppColors.accent, size: 48),
           const SizedBox(height: 20),
           Text(
             'The Ultimate Goal',

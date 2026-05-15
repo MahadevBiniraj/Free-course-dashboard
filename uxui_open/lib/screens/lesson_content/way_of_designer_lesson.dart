@@ -187,8 +187,15 @@ class _HexagonDiagramSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
           decoration: BoxDecoration(
             color: AppColors.cardBackground,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
             border: Border.all(color: AppColors.cardBorder),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
+              ),
+            ],
           ),
           child: Column(
             children: [
@@ -347,13 +354,13 @@ class _RoleCard extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: AppColors.cardBackground,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppColors.cardBorder),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.05),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
+              color: color.withOpacity(0.1),
+              blurRadius: 15,
+              offset: const Offset(0, 4),
             ),
           ],
         ),

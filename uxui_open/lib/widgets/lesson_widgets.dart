@@ -19,9 +19,10 @@ class NavButton extends StatelessWidget {
         label,
         textAlign: align,
         style: const TextStyle(
-          color: AppColors.greyLight,
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
+          color: AppColors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.5,
         ),
       ),
     );
@@ -119,8 +120,15 @@ class LessonCard extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: AppColors.cardBackground,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: AppColors.cardBorder),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.cardBorder, width: 1.2),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,8 +143,9 @@ class LessonCard extends StatelessWidget {
                   data['title']!,
                   style: const TextStyle(
                     color: AppColors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -0.2,
                   ),
                 ),
               ),
@@ -166,9 +175,9 @@ Widget buildBulletPoint(String text) {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 8, right: 12),
-          child: CircleAvatar(backgroundColor: AppColors.greyLight, radius: 3),
+        Padding(
+          padding: const EdgeInsets.only(top: 8, right: 12),
+          child: CircleAvatar(backgroundColor: AppColors.accent.withOpacity(0.5), radius: 3),
         ),
         Expanded(
           child: Text(
@@ -187,9 +196,9 @@ Widget buildBulletPointRich(List<TextSpan> spans) {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 8, right: 12),
-          child: CircleAvatar(backgroundColor: AppColors.greyLight, radius: 3),
+        Padding(
+          padding: const EdgeInsets.only(top: 8, right: 12),
+          child: CircleAvatar(backgroundColor: AppColors.accent.withOpacity(0.5), radius: 3),
         ),
         Expanded(
           child: RichText(
@@ -226,10 +235,10 @@ class LessonTile extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           decoration: BoxDecoration(
-            color: isActive ? AppColors.greenDim.withAlpha(50) : AppColors.cardBackground,
-            borderRadius: BorderRadius.circular(10),
+            color: isActive ? AppColors.accent.withOpacity(0.08) : AppColors.cardBackground,
+            borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: isActive ? AppColors.green.withAlpha(120) : AppColors.cardBorder,
+              color: isActive ? AppColors.accent.withOpacity(0.4) : AppColors.cardBorder,
               width: isActive ? 1.5 : 1.0,
             ),
           ),
@@ -237,7 +246,7 @@ class LessonTile extends StatelessWidget {
             children: [
               Icon(
                 isActive ? Icons.play_circle_fill : Icons.insert_drive_file_outlined,
-                color: isActive ? AppColors.green : AppColors.grey,
+                color: isActive ? AppColors.accent : AppColors.grey,
                 size: 20,
               ),
               const SizedBox(width: 16),
@@ -255,16 +264,16 @@ class LessonTile extends StatelessWidget {
                 const Text(
                   'ACTIVE',
                   style: TextStyle(
-                    color: AppColors.green,
-                    fontSize: 11,
+                    color: AppColors.accent,
+                    fontSize: 10,
                     fontWeight: FontWeight.w900,
-                    letterSpacing: 0.5,
+                    letterSpacing: 1.0,
                   ),
                 ),
               const SizedBox(width: 8),
               Icon(
                 Icons.arrow_forward_ios_rounded,
-                color: isActive ? AppColors.green : AppColors.greyDark,
+                color: isActive ? AppColors.accent : AppColors.greyDark,
                 size: 14,
               ),
             ],

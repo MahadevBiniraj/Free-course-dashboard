@@ -42,17 +42,19 @@ class BreadcrumbBar extends StatelessWidget {
                 ),
                 item.isLast
                     ? Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                         decoration: BoxDecoration(
-                          color: AppColors.greenDim,
-                          borderRadius: BorderRadius.circular(12),
+                          color: AppColors.accent.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(100),
+                          border: Border.all(color: AppColors.accent.withOpacity(0.2)),
                         ),
                         child: Text(
                           item.label,
                           style: const TextStyle(
-                            color: AppColors.green,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
+                            color: AppColors.accent,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.2,
                           ),
                         ),
                       )
@@ -60,7 +62,7 @@ class BreadcrumbBar extends StatelessWidget {
                         item.label,
                         style: TextStyle(
                           color: item.color ?? AppColors.greyLight,
-                          fontSize: 14,
+                          fontSize: 13,
                           fontWeight: item.color != null ? FontWeight.w600 : FontWeight.normal,
                         ),
                       ),

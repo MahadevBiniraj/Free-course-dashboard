@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/course_data.dart';
 import '../theme/app_theme.dart';
 import '../widgets/nav_sidebar.dart';
+import '../widgets/modern_sidebar.dart';
+
 
 // Lesson Imports
 import 'package:uxui_open/screens/lesson_content/welcome_lesson.dart';
@@ -88,14 +90,10 @@ class _CourseNavPageState extends State<CourseNavPage> {
             decoration: const BoxDecoration(
               color: AppColors.cardBackground,
             ),
-            child: NavSidebar(
+            child: ModernSidebar(
               sections: kSections,
-              expandedIndex: _expandedIndex,
+              initialExpandedIndex: _expandedIndex,
               selectedLesson: _selectedLesson,
-              onSectionTap: (i) => setState(() {
-                _expandedIndex = i;
-                _selectedLesson = kSections[i].title;
-              }),
               onLessonTap: (l) => setState(() => _selectedLesson = l),
               onCollapse: () => setState(() => _sidebarCollapsed = true),
             ),
