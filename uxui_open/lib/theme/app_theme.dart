@@ -50,7 +50,7 @@ class AppTextStyles {
   );
 
   static const label = TextStyle(
-    color: Color.fromARGB(255, 42, 203, ,
+    color: AppColors.accent,
     fontSize: 14,
     fontWeight: FontWeight.w600,
     letterSpacing: 0.5,

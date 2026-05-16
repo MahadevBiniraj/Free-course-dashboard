@@ -204,34 +204,49 @@ class _ModernSidebarState extends State<ModernSidebar> {
         borderRadius: BorderRadius.circular(10),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          margin: const EdgeInsets.only(bottom: 2),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
-            color: isSelected ? Colors.white.withOpacity(0.05) : Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
+            color: isSelected ? AppColors.greyDark : Colors.transparent,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: isSelected ? Colors.white.withOpacity(0.05) : Colors.transparent,
+            ),
           ),
           child: Row(
             children: [
+              if (isSelected)
+                Container(
+                  width: 3,
+                  height: 16,
+                  margin: const EdgeInsets.only(right: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.accent,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
               Expanded(
                 child: Text(
                   cleanText,
-                  style: TextStyle(fontFamily: 'Lufga', 
+                  style: GoogleFonts.inter(
                     color: isSelected ? Colors.white : AppColors.greyLight,
                     fontSize: 14,
-                    fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
               ),
               if (hasStar)
                 const Icon(
-                  Icons.star,
+                  Icons.star_rounded,
                   color: AppColors.yellow,
-                  size: 14,
+                  size: 16,
                 ),
             ],
           ),
         ),
       ),
     );
+
   }
 
   Widget _buildFooter() {

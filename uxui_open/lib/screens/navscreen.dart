@@ -19,6 +19,14 @@ import 'package:uxui_open/screens/lesson_content/designing_for_everyone_lesson.d
 import 'package:uxui_open/screens/lesson_content/design_process_lesson.dart';
 import 'package:uxui_open/screens/lesson_content/design_foundations_lesson.dart';
 import 'package:uxui_open/screens/lesson_content/placeholder_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/research_methods_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/user_centered_research_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/using_research_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/insight_translation_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/ongoing_evaluation_lesson.dart';
+import 'package:uxui_open/screens/lesson_content/assignment_03_lesson.dart';
+
+
 
 void main() {
   runApp(const UXUIApp());
@@ -60,7 +68,7 @@ class _CourseNavPageState extends State<CourseNavPage> {
   @override
   void initState() {
     super.initState();
-    _selectedLesson = widget.initialLesson ?? '1.1 Welcome';
+    _selectedLesson = widget.initialLesson ?? '3.3 Research Methods';
 
     // Auto-expand the section containing the initial lesson
     for (int i = 0; i < kSections.length; i++) {
@@ -230,6 +238,44 @@ class _MainContentRouter extends StatelessWidget {
           onExpandSidebar: onExpandSidebar,
           onLessonTap: onLessonTap,
         );
+      case '3.3 Research Methods':
+        return ResearchMethodsLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
+        );
+      case '3.1 User Centered Research':
+        return UserCenteredResearchLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
+        );
+      case '3.2 Using Research':
+        return UsingResearchLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
+        );
+      case '3.4 Insight Translation':
+        return InsightTranslationLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
+        );
+      case '3.5 Ongoing Evaluation':
+        return OngoingEvaluationLesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
+        );
+      case '3.6 Assignment ⭐':
+        return Assignment03Lesson(
+          sidebarCollapsed: sidebarCollapsed,
+          onExpandSidebar: onExpandSidebar,
+          onLessonTap: onLessonTap,
+        );
+
+
       default:
         return PlaceholderLesson(
           title: selectedLesson,
